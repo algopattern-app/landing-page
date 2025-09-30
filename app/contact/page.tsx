@@ -1,8 +1,5 @@
 import { Button } from "@/components/ui/button"
-import { Card } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { ArrowRight, Mail, MessageSquare, Clock } from "lucide-react"
+import { Footer } from "@/components/footer"
 
 export default function ContactPage() {
   return (
@@ -30,9 +27,6 @@ export default function ContactPage() {
               </a>
             </nav>
             <div className="flex items-center space-x-4">
-              <Button variant="ghost" className="hidden sm:inline-flex">
-                Sign In
-              </Button>
               <Button>Join Waitlist</Button>
             </div>
           </div>
@@ -56,25 +50,7 @@ export default function ContactPage() {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-border/40 py-12">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row items-center justify-between">
-            <div className="flex items-center space-x-2 mb-4 md:mb-0">
-              <img src="/images/algopattern-logo.png" alt="AlgoPattern logo" className="h-8 w-8 object-contain" />
-              <span className="font-bold text-xl text-foreground">AlgoPattern</span>
-              <span className="text-muted-foreground">© 2025</span>
-            </div>
-            <div className="flex items-center space-x-6">
-              <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
-                Privacy Policy
-              </a>
-              <a href="/contact" className="text-muted-foreground hover:text-foreground transition-colors">
-                Contact
-              </a>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   )
 }
