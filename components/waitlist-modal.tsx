@@ -59,11 +59,22 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
             } else {
                 // Error from API
                 console.error('API Error:', result.error)
-                toast({
-                    title: "Oops! Something went wrong",
-                    description: result.error || 'Failed to join waitlist. Please try again.',
-                    variant: "destructive",
-                })
+
+                // Handle duplicate email case specially
+                if (response.status === 409) {
+                    toast({
+                        title: "You're already on the list! 📧",
+                        description: result.error || "This email is already on our waitlist.",
+                        variant: "default",
+                    })
+                    onClose()
+                } else {
+                    toast({
+                        title: "Oops! Something went wrong",
+                        description: result.error || 'Failed to join waitlist. Please try again.',
+                        variant: "destructive",
+                    })
+                }
             }
         } catch (error) {
             console.error('Network Error:', error)

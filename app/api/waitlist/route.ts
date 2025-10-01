@@ -75,6 +75,37 @@ async function getDataSourceId(databaseId: string): Promise<string> {
     }
 }
 
+// Helper function to check if email already exists in the database
+async function checkEmailExists(databaseId: string, email: string): Promise<boolean> {
+    try {
+        console.log('Checking if email exists:', email)
+
+        const dataSourceId = await getDataSourceId(databaseId)
+        console.log('Using data source ID for query:', dataSourceId)
+
+        const response = await notion.request({
+            path: `data_sources/${dataSourceId}/query`,
+            method: 'post',
+            body: {
+                filter: {
+                    property: 'Email',
+                    title: {
+                        equals: email
+                    }
+                },
+                page_size: 1
+            }
+        }) as any
+
+        console.log('Data source email check response:', response.results?.length > 0 ? 'Email exists' : 'Email not found')
+        return response.results?.length > 0 || false
+    } catch (error) {
+        console.error('Error checking email existence:', error)
+        // In case of error, allow the submission to proceed (fail open)
+        return false
+    }
+}
+
 export async function POST(request: NextRequest) {
     try {
         const body = await request.json()
@@ -93,6 +124,15 @@ export async function POST(request: NextRequest) {
             return NextResponse.json(
                 { error: 'Database configuration error' },
                 { status: 500 }
+            )
+        }
+
+        // Check if email already exists in the database
+        const emailExists = await checkEmailExists(NOTION_DATABASE_ID, email)
+        if (emailExists) {
+            return NextResponse.json(
+                { error: 'This email is already on our waitlist! Thanks for your interest.' },
+                { status: 409 }
             )
         }
 
