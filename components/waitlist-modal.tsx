@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Textarea } from "@/components/ui/textarea"
+import { useToast } from "@/hooks/use-toast"
 
 interface WaitlistModalProps {
     isOpen: boolean
@@ -23,6 +24,7 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
     })
 
     const [isSubmitting, setIsSubmitting] = useState(false)
+    const { toast } = useToast()
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
@@ -50,15 +52,26 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
                     struggle: "",
                     pricing: ""
                 })
-                alert("Thanks for joining the waitlist! We'll be in touch soon.")
+                toast({
+                    title: "Thanks for joining the waitlist! 🎉",
+                    description: "We'll be in touch soon.",
+                })
             } else {
                 // Error from API
                 console.error('API Error:', result.error)
-                alert(`Error: ${result.error || 'Failed to join waitlist. Please try again.'}`)
+                toast({
+                    title: "Oops! Something went wrong",
+                    description: result.error || 'Failed to join waitlist. Please try again.',
+                    variant: "destructive",
+                })
             }
         } catch (error) {
             console.error('Network Error:', error)
-            alert('Network error. Please check your connection and try again.')
+            toast({
+                title: "Connection Error",
+                description: 'Network error. Please check your connection and try again.',
+                variant: "destructive",
+            })
         } finally {
             setIsSubmitting(false)
         }
