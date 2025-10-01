@@ -76,8 +76,7 @@
 }
 
 @theme inline {
-  /* Swapped font-sans and font-mono to make monospace the default */
-  --font-sans: var(--font-geist-mono);
+  --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-sans);
   --color-background: var(--background);
   --color-foreground: var(--foreground);

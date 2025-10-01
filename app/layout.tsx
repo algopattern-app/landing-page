@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   title: "AlgoPattern - Master Coding Interview Patterns",
   description:
     "A Duolingo-style app for Data Structures & Algorithms. Build intuition, sharpen your problem-solving skills, and recognize patterns that unlock LeetCode problems.",
-  generator: "v0.app",
+  keywords: ["coding interview", "data structures", "algorithms", "leetcode", "programming", "dsa", "leetcode patterns", "coding app", "algorithm practice", "coding practice"],
   icons: {
     icon: [
       { url: "/images/algopattern-logo.png", sizes: "32x32", type: "image/png" },

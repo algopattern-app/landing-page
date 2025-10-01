@@ -14,7 +14,7 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <header className="bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex h-16 items-center justify-between">
             <div className="flex items-center space-x-2">
@@ -49,10 +49,8 @@ export default function HomePage() {
                 <img
                   src="/images/algopattern-mascot.png"
                   alt="AlgoPattern mascot - friendly robot character"
-                  className="w-48 h-48 sm:w-56 sm:h-56 lg:w-64 lg:h-64 object-contain animate-bounce-slow"
+                  className="w-48 h-48 sm:w-56 sm:h-56 lg:w-64 lg:h-64 object-contain"
                 />
-                {/* Subtle glow effect behind mascot */}
-                <div className="absolute inset-0 bg-primary/10 rounded-full blur-3xl scale-75 -z-10" />
               </div>
             </div>
 
