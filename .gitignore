@@ -1,0 +1,8 @@
+/dist
+/node_modules
+/build
+/tmp
+
+.next
+*.env*
+next-env.d.ts
