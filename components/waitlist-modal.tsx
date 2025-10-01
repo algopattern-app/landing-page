@@ -28,21 +28,40 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
         e.preventDefault()
         setIsSubmitting(true)
 
-        // TODO: Implement actual form submission logic
-        console.log("Waitlist form data:", formData)
+        try {
+            const response = await fetch('/api/waitlist', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            })
 
-        // Simulate API call
-        await new Promise(resolve => setTimeout(resolve, 1000))
+            const result = await response.json()
 
-        setIsSubmitting(false)
-        onClose()
-
-        // TODO: Show success message
-        alert("Thanks for joining the waitlist! We'll be in touch soon.")
-    }
-
-    const handleInputChange = (field: string, value: string) => {
-        setFormData(prev => ({ ...prev, [field]: value }))
+            if (response.ok) {
+                // Success
+                onClose()
+                // Reset form
+                setFormData({
+                    email: "",
+                    platform: "",
+                    experience: "",
+                    struggle: "",
+                    pricing: ""
+                })
+                alert("Thanks for joining the waitlist! We'll be in touch soon.")
+            } else {
+                // Error from API
+                console.error('API Error:', result.error)
+                alert(`Error: ${result.error || 'Failed to join waitlist. Please try again.'}`)
+            }
+        } catch (error) {
+            console.error('Network Error:', error)
+            alert('Network error. Please check your connection and try again.')
+        } finally {
+            setIsSubmitting(false)
+        }
     }
 
     return (
