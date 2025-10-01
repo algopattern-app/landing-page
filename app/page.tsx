@@ -1,10 +1,16 @@
+"use client"
+
+import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Footer } from "@/components/footer"
+import { WaitlistModal } from "@/components/waitlist-modal"
 import { ArrowRight, Clock, Gamepad2, BookOpen, Smartphone, Trophy, Zap, Target, ChevronDown } from "lucide-react"
 
 export default function HomePage() {
+  const [isWaitlistModalOpen, setIsWaitlistModalOpen] = useState(false)
+
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
@@ -28,7 +34,7 @@ export default function HomePage() {
             </nav>
             <div className="flex items-center space-x-4">
 
-              <Button>Join Waitlist</Button>
+              <Button onClick={() => setIsWaitlistModalOpen(true)}>Join Waitlist</Button>
             </div>
           </div>
         </div>
@@ -51,13 +57,13 @@ export default function HomePage() {
             </div>
 
             <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-6xl lg:text-7xl text-balance">
-              Master Coding Interview Patterns <span className="text-primary">5 Minutes at a Time</span>
+              Master Coding Interview Patterns, <span className="text-primary">5 Minutes at a Time</span>
             </h1>
             <p className="mt-6 text-lg leading-8 text-muted-foreground max-w-2xl mx-auto text-pretty">
               A Duolingo-style app for data structures &amp; algorithms. Build intuition, sharpen your problem-solving skills, and recognize patterns that unlock LeetCode problems.
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
-              <Button size="lg" className="px-8 py-4 text-lg font-semibold">
+              <Button size="lg" className="px-8 py-4 text-lg font-semibold" onClick={() => setIsWaitlistModalOpen(true)}>
                 Join the Waitlist
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
@@ -311,7 +317,7 @@ export default function HomePage() {
             <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
               AlgoPattern is in early development. Join the waitlist to get early access and help shape the app.
             </p>
-            <Button size="lg" className="px-8 py-4 text-lg font-semibold">
+            <Button size="lg" className="px-8 py-4 text-lg font-semibold" onClick={() => setIsWaitlistModalOpen(true)}>
               Join the Waitlist
               <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
@@ -321,6 +327,12 @@ export default function HomePage() {
 
       {/* Footer */}
       <Footer />
+
+      {/* Waitlist Modal */}
+      <WaitlistModal
+        isOpen={isWaitlistModalOpen}
+        onClose={() => setIsWaitlistModalOpen(false)}
+      />
     </div>
   )
 }
