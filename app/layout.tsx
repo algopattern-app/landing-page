@@ -11,6 +11,21 @@ export const metadata: Metadata = {
   description:
     "A Duolingo-style app for Data Structures & Algorithms. Build intuition, sharpen your problem-solving skills, and recognize patterns that unlock LeetCode problems.",
   generator: "v0.app",
+  icons: {
+    icon: [
+      { url: "/images/algopattern-logo.png", sizes: "32x32", type: "image/png" },
+      { url: "/images/algopattern-logo.png", sizes: "16x16", type: "image/png" }
+    ],
+    apple: [
+      { url: "/images/algopattern-logo.png", sizes: "180x180", type: "image/png" }
+    ],
+    other: [
+      {
+        rel: "icon",
+        url: "/images/algopattern-logo.png",
+      }
+    ]
+  }
 }
 
 export default function RootLayout({
