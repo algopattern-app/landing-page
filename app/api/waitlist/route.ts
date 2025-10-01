@@ -89,7 +89,7 @@ async function checkEmailExists(databaseId: string, email: string): Promise<bool
             body: {
                 filter: {
                     property: 'Email',
-                    title: {
+                    email: {
                         equals: email
                     }
                 },
@@ -109,9 +109,16 @@ async function checkEmailExists(databaseId: string, email: string): Promise<bool
 export async function POST(request: NextRequest) {
     try {
         const body = await request.json()
-        const { email, platform, experience, struggle, pricing } = body
+        const { name, email, platform, experience, struggle, pricing } = body
 
         // Validate required fields
+        if (!name) {
+            return NextResponse.json(
+                { error: 'Name is required' },
+                { status: 400 }
+            )
+        }
+
         if (!email) {
             return NextResponse.json(
                 { error: 'Email is required' },
@@ -167,7 +174,6 @@ export async function POST(request: NextRequest) {
         const platformMap: { [key: string]: string } = {
             'ios': 'iOS',
             'android': 'Android',
-            'both': 'Both' // Note: Your schema only has iOS/Android, you may need to update it
         }
 
         const pricingMap: { [key: string]: string } = {
@@ -179,14 +185,17 @@ export async function POST(request: NextRequest) {
 
         // Create the page properties
         const properties: any = {
-            'Email': {
+            'Name': {
                 title: [
                     {
                         text: {
-                            content: email,
+                            content: name,
                         },
                     },
                 ],
+            },
+            'Email': {
+                email: email,
             },
             'Submitted at': {
                 date: {

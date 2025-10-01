@@ -16,6 +16,7 @@ interface WaitlistModalProps {
 
 export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
     const [formData, setFormData] = useState({
+        name: "",
         email: "",
         platform: "",
         experience: "",
@@ -46,6 +47,7 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
                 onClose()
                 // Reset form
                 setFormData({
+                    name: "",
                     email: "",
                     platform: "",
                     experience: "",
@@ -99,6 +101,22 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
                 </DialogHeader>
 
                 <form onSubmit={handleSubmit} className="space-y-6">
+                    {/* Name */}
+                    <div className="space-y-2">
+                        <Label htmlFor="name">
+                            Name <span className="text-destructive">*</span>
+                        </Label>
+                        <Input
+                            id="name"
+                            type="text"
+                            placeholder="Your name"
+                            required
+                            value={formData.name}
+                            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                            className="font-mono"
+                        />
+                    </div>
+
                     {/* Email */}
                     <div className="space-y-2">
                         <Label htmlFor="email">
