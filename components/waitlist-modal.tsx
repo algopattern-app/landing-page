@@ -21,7 +21,8 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
         platform: "",
         experience: "",
         struggle: "",
-        pricing: ""
+        pricing: "",
+        comments: ""
     })
 
     const [isSubmitting, setIsSubmitting] = useState(false)
@@ -52,7 +53,8 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
                     platform: "",
                     experience: "",
                     struggle: "",
-                    pricing: ""
+                    pricing: "",
+                    comments: ""
                 })
                 toast({
                     title: "Thanks for joining the waitlist! 🎉",
@@ -224,6 +226,19 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
                                 </Label>
                             </div>
                         </RadioGroup>
+                    </div>
+
+                    {/* Additional Comments */}
+                    <div className="space-y-2">
+                        <Label htmlFor="comments">Any additional comments:</Label>
+                        <Textarea
+                            id="comments"
+                            placeholder="Feel free to share any thoughts, questions, or suggestions..."
+                            value={formData.comments}
+                            onChange={(e) => setFormData({ ...formData, comments: e.target.value })}
+                            className="font-mono"
+                            rows={3}
+                        />
                     </div>
 
                     {/* Submit Button */}

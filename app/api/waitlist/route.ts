@@ -109,7 +109,7 @@ async function checkEmailExists(databaseId: string, email: string): Promise<bool
 export async function POST(request: NextRequest) {
     try {
         const body = await request.json()
-        const { name, email, platform, experience, struggle, pricing } = body
+        const { name, email, platform, experience, struggle, pricing, comments } = body
 
         // Validate required fields
         if (!name) {
@@ -244,6 +244,18 @@ export async function POST(request: NextRequest) {
                     {
                         text: {
                             content: struggle,
+                        },
+                    },
+                ],
+            }
+        }
+
+        if (comments) {
+            properties['Additional comments'] = {
+                rich_text: [
+                    {
+                        text: {
+                            content: comments,
                         },
                     },
                 ],
