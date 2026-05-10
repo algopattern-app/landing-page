@@ -9,9 +9,9 @@ export function Footer() {
                         <span className="text-muted-foreground">© 2026</span>
                     </div>
                     <div className="flex items-center space-x-6">
-                        {/* <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
+                        <a href="/privacy" className="text-muted-foreground hover:text-foreground transition-colors">
                             Privacy Policy
-                        </a> */}
+                        </a>
                         <a href="/contact" className="text-muted-foreground hover:text-foreground transition-colors">
                             Contact
                         </a>

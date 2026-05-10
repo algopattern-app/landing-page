@@ -7,42 +7,13 @@ const notion = new Client({
 
 const NOTION_DATABASE_ID = process.env.NOTION_DATABASE_ID
 
-// Helper function to get country from IP address
-async function getCountryFromIP(request: NextRequest): Promise<string> {
+function getCountryFromRequest(request: NextRequest): string {
+    const code = request.headers.get('x-vercel-ip-country')
+    if (!code) return 'Unknown'
     try {
-        // Get the user's IP address
-        const forwarded = request.headers.get('x-forwarded-for')
-        const realIP = request.headers.get('x-real-ip')
-        const ip = forwarded?.split(',')[0] || realIP || 'unknown'
-
-        console.log('User IP:', ip)
-
-        // Skip geolocation for localhost/development
-        if (ip === 'unknown' || ip === '127.0.0.1' || ip === '::1' || ip.startsWith('192.168.') || ip.startsWith('10.')) {
-            return 'Unknown'
-        }
-
-        // Use a free IP geolocation service
-        const controller = new AbortController()
-        const timeoutId = setTimeout(() => controller.abort(), 5000) // 5 second timeout
-
-        const response = await fetch(`http://ip-api.com/json/${ip}?fields=country,countryCode`, {
-            signal: controller.signal,
-        })
-
-        clearTimeout(timeoutId)
-
-        if (response.ok) {
-            const data = await response.json()
-            const country = data.country || 'Unknown'
-            console.log('Detected country:', country)
-            return country
-        }
-
-        return 'Unknown'
-    } catch (error) {
-        console.error('Error detecting country:', error)
-        return 'Unknown'
+        return new Intl.DisplayNames(['en'], { type: 'region' }).of(code) ?? code
+    } catch {
+        return code
     }
 }
 
@@ -142,8 +113,7 @@ export async function POST(request: NextRequest) {
             )
         }
 
-        // Get user's country from IP address
-        const country = await getCountryFromIP(request)
+        const country = getCountryFromRequest(request)
 
         // Try to get the data source ID, but fall back to database ID if it fails
         let parentConfig: any
