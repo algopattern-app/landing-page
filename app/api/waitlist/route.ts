@@ -3,7 +3,6 @@ import { Client } from '@notionhq/client'
 
 const notion = new Client({
     auth: process.env.NOTION_API_KEY,
-    notionVersion: '2025-09-03',
 })
 
 const NOTION_DATABASE_ID = process.env.NOTION_DATABASE_ID
@@ -109,7 +108,7 @@ async function checkEmailExists(databaseId: string, email: string): Promise<bool
 export async function POST(request: NextRequest) {
     try {
         const body = await request.json()
-        const { name, email, platform, experience, struggle, pricing, comments } = body
+        const { name, email, platform, experience, struggle, pricing, hearAbout, comments } = body
 
         // Validate required fields
         if (!name) {
@@ -183,6 +182,13 @@ export async function POST(request: NextRequest) {
             '20-plus': '$20+ / month'
         }
 
+        const hearAboutMap: { [key: string]: string } = {
+            'youtube': 'YouTube',
+            'instagram': 'Instagram',
+            'search': 'Search',
+            'other': 'Other'
+        }
+
         // Create the page properties
         const properties: any = {
             'Name': {
@@ -247,6 +253,14 @@ export async function POST(request: NextRequest) {
                         },
                     },
                 ],
+            }
+        }
+
+        if (hearAbout) {
+            properties['Hear about'] = {
+                select: {
+                    name: hearAboutMap[hearAbout] || hearAbout,
+                },
             }
         }
 

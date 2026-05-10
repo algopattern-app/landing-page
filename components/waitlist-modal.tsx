@@ -22,6 +22,7 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
         experience: "",
         struggle: "",
         pricing: "",
+        hearAbout: "",
         comments: ""
     })
 
@@ -54,6 +55,7 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
                     experience: "",
                     struggle: "",
                     pricing: "",
+                    hearAbout: "",
                     comments: ""
                 })
                 toast({
@@ -223,6 +225,40 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
                                 <RadioGroupItem value="20-plus" id="20-plus" />
                                 <Label htmlFor="20-plus" className="font-normal cursor-pointer">
                                     $20+ / month
+                                </Label>
+                            </div>
+                        </RadioGroup>
+                    </div>
+
+                    {/* How did you hear about us */}
+                    <div className="space-y-3">
+                        <Label>How did you hear about us?</Label>
+                        <RadioGroup
+                            value={formData.hearAbout}
+                            onValueChange={(value) => setFormData({ ...formData, hearAbout: value })}
+                        >
+                            <div className="flex items-center space-x-2">
+                                <RadioGroupItem value="youtube" id="youtube" />
+                                <Label htmlFor="youtube" className="font-normal cursor-pointer">
+                                    YouTube
+                                </Label>
+                            </div>
+                            <div className="flex items-center space-x-2">
+                                <RadioGroupItem value="instagram" id="instagram" />
+                                <Label htmlFor="instagram" className="font-normal cursor-pointer">
+                                    Instagram
+                                </Label>
+                            </div>
+                            <div className="flex items-center space-x-2">
+                                <RadioGroupItem value="search" id="search" />
+                                <Label htmlFor="search" className="font-normal cursor-pointer">
+                                    Search (Google, etc.)
+                                </Label>
+                            </div>
+                            <div className="flex items-center space-x-2">
+                                <RadioGroupItem value="other" id="other" />
+                                <Label htmlFor="other" className="font-normal cursor-pointer">
+                                    Other
                                 </Label>
                             </div>
                         </RadioGroup>
