@@ -6,7 +6,7 @@ export function Footer() {
                     <div className="flex items-center space-x-2 mb-4 md:mb-0">
                         <img src="/images/algopattern-logo.png" alt="AlgoPattern logo" className="h-8 w-8 object-contain" />
                         <span className="font-bold text-xl text-foreground">AlgoPattern</span>
-                        <span className="text-muted-foreground">© 2025</span>
+                        <span className="text-muted-foreground">© 2026</span>
                     </div>
                     <div className="flex items-center space-x-6">
                         {/* <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">

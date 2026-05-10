@@ -14,7 +14,7 @@ async function getCountryFromIP(request: NextRequest): Promise<string> {
         // Get the user's IP address
         const forwarded = request.headers.get('x-forwarded-for')
         const realIP = request.headers.get('x-real-ip')
-        const ip = forwarded?.split(',')[0] || realIP || request.ip || 'unknown'
+        const ip = forwarded?.split(',')[0] || realIP || 'unknown'
 
         console.log('User IP:', ip)
 
