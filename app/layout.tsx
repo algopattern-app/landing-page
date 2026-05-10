@@ -28,16 +28,16 @@ export const metadata: Metadata = {
   ],
   icons: {
     icon: [
-      { url: "/images/algopattern-logo.png", sizes: "32x32", type: "image/png" },
-      { url: "/images/algopattern-logo.png", sizes: "16x16", type: "image/png" }
+      { url: "/images/logo_v2_white_background.svg", sizes: "32x32", type: "image/png" },
+      { url: "/images/logo_v2_white_background.svg", sizes: "16x16", type: "image/png" }
     ],
     apple: [
-      { url: "/images/algopattern-logo.png", sizes: "180x180", type: "image/png" }
+      { url: "/images/logo_v2_white_background.svg", sizes: "180x180", type: "image/png" }
     ],
     other: [
       {
         rel: "icon",
-        url: "/images/algopattern-logo.png",
+        url: "/images/logo_v2_white_background.svg",
       }
     ]
   }
