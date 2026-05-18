@@ -18,7 +18,7 @@ export default function HomePage() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex h-16 items-center justify-between">
             <div className="flex items-center space-x-2">
-              <img src="/images/logo_v2_bare.svg" alt="AlgoPattern logo" className="h-8 w-8 object-contain" />
+              <img src="/images/icon.svg" alt="AlgoPattern logo" className="h-8 w-8 object-contain" />
               <span className="font-bold text-xl text-foreground">AlgoPattern</span>
             </div>
             <nav className="hidden md:flex items-center space-x-8">
@@ -44,16 +44,6 @@ export default function HomePage() {
       <section className="relative overflow-hidden py-20 sm:py-16">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-4xl text-center">
-            <div className="mb-8 flex justify-center">
-              <div className="relative">
-                <img
-                  src="/images/algopattern-mascot.png"
-                  alt="AlgoPattern mascot - friendly robot character"
-                  className="w-48 h-48 sm:w-56 sm:h-56 lg:w-64 lg:h-64 object-contain"
-                />
-              </div>
-            </div>
-
             <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-6xl lg:text-7xl text-balance">
               Master Coding Interview Patterns, <span className="text-primary">5 Minutes at a Time</span>
             </h1>

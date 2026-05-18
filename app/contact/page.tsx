@@ -9,7 +9,7 @@ export default function ContactPage() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex h-16 items-center justify-between">
             <div className="flex items-center space-x-2">
-              <img src="/images/logo_v2_bare.svg" alt="AlgoPattern logo" className="h-8 w-8 object-contain" />
+              <img src="/images/icon.svg" alt="AlgoPattern logo" className="h-8 w-8 object-contain" />
               <span className="font-bold text-xl text-foreground">AlgoPattern</span>
             </div>
             <nav className="hidden md:flex items-center space-x-8">
