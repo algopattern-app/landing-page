@@ -21,7 +21,6 @@ export function SignupModal({ isOpen, onClose }: SignupModalProps) {
         platform: "",
         experience: "",
         struggle: "",
-        pricing: "",
         hearAbout: "",
         comments: ""
     })
@@ -54,7 +53,6 @@ export function SignupModal({ isOpen, onClose }: SignupModalProps) {
                     platform: "",
                     experience: "",
                     struggle: "",
-                    pricing: "",
                     hearAbout: "",
                     comments: ""
                 })
@@ -113,7 +111,7 @@ export function SignupModal({ isOpen, onClose }: SignupModalProps) {
                         <Input
                             id="name"
                             type="text"
-                            placeholder="Your name"
+                            placeholder="Your first name"
                             required
                             value={formData.name}
                             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
@@ -197,37 +195,6 @@ export function SignupModal({ isOpen, onClose }: SignupModalProps) {
                             onChange={(e) => setFormData({ ...formData, struggle: e.target.value })}
                             className="font-mono"
                         />
-                    </div>
-
-                    {/* Pricing */}
-                    <div className="space-y-3">
-                        <Label>What would you consider a fair monthly price for full access?</Label>
-                        <RadioGroup value={formData.pricing} onValueChange={(value) => setFormData({ ...formData, pricing: value })}>
-                            <div className="flex items-center space-x-2">
-                                <RadioGroupItem value="under-5" id="under-5" />
-                                <Label htmlFor="under-5" className="font-normal cursor-pointer">
-                                    {"< $5 / month"}
-                                </Label>
-                            </div>
-                            <div className="flex items-center space-x-2">
-                                <RadioGroupItem value="5-10" id="5-10" />
-                                <Label htmlFor="5-10" className="font-normal cursor-pointer">
-                                    $5-$10 / month
-                                </Label>
-                            </div>
-                            <div className="flex items-center space-x-2">
-                                <RadioGroupItem value="10-20" id="10-20" />
-                                <Label htmlFor="10-20" className="font-normal cursor-pointer">
-                                    $10-$20 / month
-                                </Label>
-                            </div>
-                            <div className="flex items-center space-x-2">
-                                <RadioGroupItem value="20-plus" id="20-plus" />
-                                <Label htmlFor="20-plus" className="font-normal cursor-pointer">
-                                    $20+ / month
-                                </Label>
-                            </div>
-                        </RadioGroup>
                     </div>
 
                     {/* How did you hear about us */}

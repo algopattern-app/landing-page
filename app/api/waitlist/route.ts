@@ -83,7 +83,7 @@ async function checkEmailExists(databaseId: string, email: string): Promise<bool
 export async function POST(request: NextRequest) {
     try {
         const body = await request.json()
-        const { name, email, platform, experience, struggle, pricing, hearAbout, comments } = body
+        const { name, email, platform, experience, struggle, hearAbout, comments } = body
 
         // Validate required fields
         if (!name) {
@@ -149,13 +149,6 @@ export async function POST(request: NextRequest) {
             'android': 'Android',
         }
 
-        const pricingMap: { [key: string]: string } = {
-            'under-5': '< $5 / month',
-            '5-10': '$5-$10 / month',
-            '10-20': '$10-$20 / month',
-            '20-plus': '$20+ / month'
-        }
-
         const hearAboutMap: { [key: string]: string } = {
             'youtube': 'YouTube',
             'instagram': 'Instagram',
@@ -206,14 +199,6 @@ export async function POST(request: NextRequest) {
             properties['Experience'] = {
                 select: {
                     name: experienceMap[experience] || experience,
-                },
-            }
-        }
-
-        if (pricing) {
-            properties['Pricing'] = {
-                select: {
-                    name: pricingMap[pricing] || pricing,
                 },
             }
         }
