@@ -4,80 +4,80 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  /* Updated color scheme to match the AlgoPattern mascot's blue and purple palette */
-  --background: oklch(0.98 0.01 240);
-  --foreground: oklch(0.15 0.02 240);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.15 0.02 240);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.15 0.02 240);
-  --primary: oklch(0.45 0.18 240); /* Deep blue from mascot */
-  --primary-foreground: oklch(0.98 0.01 240);
-  --secondary: oklch(0.92 0.02 240);
-  --secondary-foreground: oklch(0.15 0.02 240);
-  --muted: oklch(0.95 0.01 240);
-  --muted-foreground: oklch(0.55 0.02 240);
-  --accent: oklch(0.65 0.15 280); /* Purple from mascot's face screen */
-  --accent-foreground: oklch(0.98 0.01 240);
+  /* Palette: Cream #EDEEC9, Sky Blue #83C9F8, Slate Blue #6E72E6, Dusk Blue #394E9A, Gold #E9D985 */
+  --background: oklch(0.99 0.0 0);         /* White */
+  --foreground: oklch(0.25 0.08 260);      /* Dark, near Dusk Blue */
+  --card: oklch(0.99 0.0 0);
+  --card-foreground: oklch(0.25 0.08 260);
+  --popover: oklch(0.99 0.0 0);
+  --popover-foreground: oklch(0.25 0.08 260);
+  --primary: oklch(0.38 0.17 260);         /* Dusk Blue #394E9A */
+  --primary-foreground: oklch(0.99 0.0 0);
+  --secondary: oklch(0.90 0.05 210);       /* Light blue-tinted neutral */
+  --secondary-foreground: oklch(0.25 0.08 260);
+  --muted: oklch(0.94 0.02 240);
+  --muted-foreground: oklch(0.50 0.06 260);
+  --accent: oklch(0.87 0.11 90);           /* Light Gold #E9D985 */
+  --accent-foreground: oklch(0.25 0.08 260);
   --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.98 0.01 240);
-  --border: oklch(0.9 0.01 240);
-  --input: oklch(0.95 0.01 240);
-  --ring: oklch(0.45 0.18 240);
-  --chart-1: oklch(0.646 0.222 240);
-  --chart-2: oklch(0.6 0.15 280);
-  --chart-3: oklch(0.75 0.12 200); /* Light blue from mascot body */
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
+  --destructive-foreground: oklch(0.99 0.0 0);
+  --border: oklch(0.88 0.03 240);
+  --input: oklch(0.94 0.02 240);
+  --ring: oklch(0.55 0.20 265);            /* Slate Blue #6E72E6 */
+  --chart-1: oklch(0.38 0.17 260);         /* Dusk Blue */
+  --chart-2: oklch(0.55 0.20 265);         /* Slate Blue */
+  --chart-3: oklch(0.82 0.08 210);         /* Sky Blue #83C9F8 */
+  --chart-4: oklch(0.87 0.11 90);          /* Light Gold #E9D985 */
+  --chart-5: oklch(0.97 0.02 95);          /* Cream #EDEEC9 */
   --radius: 0.75rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  --sidebar: oklch(0.99 0.0 0);
+  --sidebar-foreground: oklch(0.25 0.08 260);
+  --sidebar-primary: oklch(0.38 0.17 260);
+  --sidebar-primary-foreground: oklch(0.99 0.0 0);
+  --sidebar-accent: oklch(0.87 0.11 90);
+  --sidebar-accent-foreground: oklch(0.25 0.08 260);
+  --sidebar-border: oklch(0.88 0.03 240);
+  --sidebar-ring: oklch(0.55 0.20 265);
 }
 
 .dark {
-  --background: oklch(0.08 0.01 240);
-  --foreground: oklch(0.95 0.01 240);
-  --card: oklch(0.12 0.01 240);
-  --card-foreground: oklch(0.95 0.01 240);
-  --popover: oklch(0.12 0.01 240);
-  --popover-foreground: oklch(0.95 0.01 240);
-  --primary: oklch(0.65 0.18 240);
-  --primary-foreground: oklch(0.08 0.01 240);
-  --secondary: oklch(0.18 0.01 240);
-  --secondary-foreground: oklch(0.95 0.01 240);
-  --muted: oklch(0.15 0.01 240);
-  --muted-foreground: oklch(0.65 0.02 240);
-  --accent: oklch(0.75 0.15 280);
-  --accent-foreground: oklch(0.08 0.01 240);
+  --background: oklch(0.18 0.06 260);
+  --foreground: oklch(0.94 0.03 95);
+  --card: oklch(0.22 0.07 260);
+  --card-foreground: oklch(0.94 0.03 95);
+  --popover: oklch(0.22 0.07 260);
+  --popover-foreground: oklch(0.94 0.03 95);
+  --primary: oklch(0.82 0.08 210);          /* Sky Blue #83C9F8 */
+  --primary-foreground: oklch(0.18 0.06 260);
+  --secondary: oklch(0.28 0.08 260);
+  --secondary-foreground: oklch(0.94 0.03 95);
+  --muted: oklch(0.25 0.07 260);
+  --muted-foreground: oklch(0.70 0.05 260);
+  --accent: oklch(0.87 0.11 90);            /* Light Gold #E9D985 */
+  --accent-foreground: oklch(0.18 0.06 260);
   --destructive: oklch(0.396 0.141 25.723);
-  --destructive-foreground: oklch(0.95 0.01 240);
-  --border: oklch(0.2 0.01 240);
-  --input: oklch(0.18 0.01 240);
-  --ring: oklch(0.65 0.18 240);
-  --chart-1: oklch(0.488 0.243 240);
-  --chart-2: oklch(0.696 0.15 280);
-  --chart-3: oklch(0.75 0.12 200);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(0.269 0 0);
-  --sidebar-ring: oklch(0.439 0 0);
+  --destructive-foreground: oklch(0.94 0.03 95);
+  --border: oklch(0.32 0.08 260);
+  --input: oklch(0.28 0.08 260);
+  --ring: oklch(0.82 0.08 210);
+  --chart-1: oklch(0.82 0.08 210);
+  --chart-2: oklch(0.55 0.20 265);
+  --chart-3: oklch(0.87 0.11 90);
+  --chart-4: oklch(0.97 0.02 95);
+  --chart-5: oklch(0.38 0.17 260);
+  --sidebar: oklch(0.22 0.07 260);
+  --sidebar-foreground: oklch(0.94 0.03 95);
+  --sidebar-primary: oklch(0.82 0.08 210);
+  --sidebar-primary-foreground: oklch(0.18 0.06 260);
+  --sidebar-accent: oklch(0.28 0.08 260);
+  --sidebar-accent-foreground: oklch(0.94 0.03 95);
+  --sidebar-border: oklch(0.32 0.08 260);
+  --sidebar-ring: oklch(0.82 0.08 210);
 }
 
 @theme inline {
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-sans);
+  --font-sans: var(--font-nunito);
+  --font-mono: var(--font-nunito);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -122,5 +122,6 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-family: var(--font-nunito), sans-serif;
   }
 }

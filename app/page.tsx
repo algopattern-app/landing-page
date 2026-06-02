@@ -3,7 +3,6 @@
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
 import { Footer } from "@/components/footer"
 import { SignupModal } from "@/components/signup-modal"
 import { ArrowRight, Clock, Gamepad2, BookOpen, Smartphone, Trophy, Zap, Target, ChevronDown } from "lucide-react"
@@ -76,7 +75,7 @@ export default function HomePage() {
       <section className="py-20 bg-muted/30">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-4xl">
-            <h2 className="text-3xl font-bold text-center mb-12 text-foreground">Why AlgoPattern?</h2>
+            <h2 className="text-4xl font-extrabold text-center mb-12 text-foreground">Why AlgoPattern?</h2>
             <div className="grid md:grid-cols-2 gap-8 items-center">
               <div>
                 <h3 className="text-xl font-semibold mb-4 text-foreground">Practicing LeetCode on mobile is clunky.</h3>
@@ -100,25 +99,23 @@ export default function HomePage() {
                 </div>
               </div>
               <div className="relative">
-                <Card className="p-6 bg-card border-border/50">
-                  <div className="space-y-4">
-                    <div className="flex items-center justify-between">
-                      <span className="text-sm font-medium text-muted-foreground">Two Pointers Pattern</span>
-                      <Badge variant="secondary">Level 2</Badge>
+                <Card className="p-5 bg-white border-border/50 max-w-xs mx-auto">
+                  <div className="space-y-3">
+                    <p className="text-lg font-bold text-foreground">Which pattern best fits?</p>
+                    <div className="rounded-2xl border border-gray-200 bg-white p-4">
+                      <p className="text-sm text-gray-600 leading-relaxed">
+                        Given a sorted array, find two numbers that add up to a target value.
+                      </p>
                     </div>
-                    <div className="h-2 bg-muted rounded-full overflow-hidden">
-                      <div className="h-full w-3/4 bg-primary rounded-full" />
-                    </div>
-                    <p className="text-sm text-muted-foreground">
-                      Which approach works best for finding pairs in a sorted array?
-                    </p>
                     <div className="space-y-2">
-                      <Button variant="outline" size="sm" className="w-full justify-start bg-transparent">
-                        A) Sliding window
-                      </Button>
-                      <Button variant="outline" size="sm" className="w-full justify-start bg-primary/10 border-primary">
-                        B) Two pointers ✓
-                      </Button>
+                      {["Hash Map / Set", "Two Pointers", "Sliding Window", "Modified Binary Search"].map((option) => (
+                        <div
+                          key={option}
+                          className="w-full rounded-2xl border border-gray-200 bg-white py-2.5 px-4 text-center text-sm font-semibold text-gray-900"
+                        >
+                          {option}
+                        </div>
+                      ))}
                     </div>
                   </div>
                 </Card>
@@ -132,7 +129,7 @@ export default function HomePage() {
       <section id="how-it-works" className="py-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-4xl text-center mb-16">
-            <h2 className="text-3xl font-bold text-foreground mb-4">How It Works</h2>
+            <h2 className="text-4xl font-extrabold text-foreground mb-4">How It Works</h2>
             <p className="text-lg text-muted-foreground">Master coding patterns in three simple steps</p>
           </div>
 
@@ -174,7 +171,7 @@ export default function HomePage() {
       <section id="features" className="py-20 bg-muted/30">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-4xl text-center mb-16">
-            <h2 className="text-3xl font-bold text-foreground mb-4">Built for Busy Learners</h2>
+            <h2 className="text-4xl font-extrabold text-foreground mb-4">Built for Busy Learners</h2>
             <p className="text-lg text-muted-foreground">Everything you need to master coding patterns on the go</p>
           </div>
 
@@ -210,7 +207,7 @@ export default function HomePage() {
       <section id="faq" className="py-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-4xl text-center mb-16">
-            <h2 className="text-3xl font-bold text-foreground mb-4">Frequently Asked Questions</h2>
+            <h2 className="text-4xl font-extrabold text-foreground mb-4">Frequently Asked Questions</h2>
             <p className="text-lg text-muted-foreground">Everything you need to know about AlgoPattern</p>
           </div>
 
@@ -300,7 +297,7 @@ export default function HomePage() {
       <section className="py-20 bg-primary/5">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-2xl text-center">
-            <h2 className="text-3xl font-bold text-foreground mb-4">Start Learning Today</h2>
+            <h2 className="text-4xl font-extrabold text-foreground mb-4">Start Learning Today</h2>
             <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
               AlgoPattern is currently in beta.
               <br></br>

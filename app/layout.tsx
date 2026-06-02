@@ -1,11 +1,15 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { GeistSans } from "geist/font/sans"
-import { GeistMono } from "geist/font/mono"
+import { Nunito } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import { Suspense } from "react"
 import { Toaster } from "@/components/ui/toaster"
 import "./globals.css"
+
+const nunito = Nunito({
+  subsets: ["latin"],
+  variable: "--font-nunito",
+})
 
 export const metadata: Metadata = {
   title: "AlgoPattern - Master Coding Interview Patterns",
@@ -45,7 +49,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`font-mono ${GeistSans.variable} ${GeistMono.variable}`}>
+      <body className={`font-sans ${nunito.variable}`}>
         <Suspense fallback={null}>{children}</Suspense>
         <Analytics />
         <Toaster />
