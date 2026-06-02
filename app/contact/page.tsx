@@ -27,7 +27,7 @@ export default function ContactPage() {
               </a>
             </nav>
             <div className="flex items-center space-x-4">
-              <Button>Join Waitlist</Button>
+              <Button>Join Beta</Button>
             </div>
           </div>
         </div>
@@ -38,7 +38,7 @@ export default function ContactPage() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-4xl text-center">
             <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl lg:text-6xl text-balance">
-              Get in <span className="text-primary">touch</span>
+              Get <span className="text-primary">in touch</span>
             </h1>
             <p className="mt-6 text-lg leading-8 text-muted-foreground max-w-2xl mx-auto text-pretty">
               Have questions about AlgoPattern? Want to share feedback or suggestions? We'd love to hear from you. Please email us at <a href="mailto:algopattern.dev@gmail.com" className="font-bold text-primary">algopattern.dev@gmail.com</a>.

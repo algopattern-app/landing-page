@@ -5,11 +5,11 @@ import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Footer } from "@/components/footer"
-import { WaitlistModal } from "@/components/waitlist-modal"
+import { SignupModal } from "@/components/signup-modal"
 import { ArrowRight, Clock, Gamepad2, BookOpen, Smartphone, Trophy, Zap, Target, ChevronDown } from "lucide-react"
 
 export default function HomePage() {
-  const [isWaitlistModalOpen, setIsWaitlistModalOpen] = useState(false)
+  const [isSignupModalOpen, setIsSignupModalOpen] = useState(false)
 
   return (
     <div className="min-h-screen bg-background">
@@ -34,7 +34,7 @@ export default function HomePage() {
             </nav>
             <div className="flex items-center space-x-4">
 
-              <Button onClick={() => setIsWaitlistModalOpen(true)}>Join Waitlist</Button>
+              <Button onClick={() => setIsSignupModalOpen(true)}>Join Beta</Button>
             </div>
           </div>
         </div>
@@ -51,8 +51,8 @@ export default function HomePage() {
               A Duolingo-style app for data structures &amp; algorithms. Build intuition, sharpen your problem-solving skills, and recognize patterns that unlock LeetCode problems.
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
-              <Button size="lg" className="px-8 py-4 text-lg font-semibold" onClick={() => setIsWaitlistModalOpen(true)}>
-                Join the Waitlist
+              <Button size="lg" className="px-8 py-4 text-lg font-semibold" onClick={() => setIsSignupModalOpen(true)}>
+                Join the Beta
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
             </div>
@@ -287,8 +287,7 @@ export default function HomePage() {
                 </summary>
                 <div className="mt-4 text-muted-foreground leading-relaxed">
                   <p>
-                    AlgoPattern is currently in early development. Join our waitlist to get early access and help shape
-                    the app's features based on your feedback.
+                    AlgoPattern is currently in beta! Join today to get access and help shape the app's features with your feedback.
                   </p>
                 </div>
               </details>
@@ -301,12 +300,14 @@ export default function HomePage() {
       <section className="py-20 bg-primary/5">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-2xl text-center">
-            <h2 className="text-3xl font-bold text-foreground mb-4">Be the First to Try It</h2>
+            <h2 className="text-3xl font-bold text-foreground mb-4">Start Learning Today</h2>
             <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
-              AlgoPattern is in early development. Join the waitlist to get early access and help shape the app.
+              AlgoPattern is currently in beta.
+              <br></br>
+              Join to get access and help shape the app with your feedback.
             </p>
-            <Button size="lg" className="px-8 py-4 text-lg font-semibold" onClick={() => setIsWaitlistModalOpen(true)}>
-              Join the Waitlist
+            <Button size="lg" className="px-8 py-4 text-lg font-semibold" onClick={() => setIsSignupModalOpen(true)}>
+              Join the Beta
               <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
           </div>
@@ -316,10 +317,10 @@ export default function HomePage() {
       {/* Footer */}
       <Footer />
 
-      {/* Waitlist Modal */}
-      <WaitlistModal
-        isOpen={isWaitlistModalOpen}
-        onClose={() => setIsWaitlistModalOpen(false)}
+      {/* Signup Modal */}
+      <SignupModal
+        isOpen={isSignupModalOpen}
+        onClose={() => setIsSignupModalOpen(false)}
       />
     </div>
   )

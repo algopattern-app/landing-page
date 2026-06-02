@@ -1,9 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { Client } from '@notionhq/client'
+import { Resend } from 'resend'
+import { betaAccessEmailHtml } from '@/emails/beta-access-email'
 
 const notion = new Client({
     auth: process.env.NOTION_API_KEY,
 })
+
+const resend = new Resend(process.env.RESEND_API_KEY)
 
 const NOTION_DATABASE_ID = process.env.NOTION_DATABASE_ID
 
@@ -108,7 +112,7 @@ export async function POST(request: NextRequest) {
         const emailExists = await checkEmailExists(NOTION_DATABASE_ID, email)
         if (emailExists) {
             return NextResponse.json(
-                { error: 'This email is already on our waitlist! Thanks for your interest.' },
+                { error: 'This email is already on our list! Thanks for your interest.' },
                 { status: 409 }
             )
         }
@@ -252,10 +256,23 @@ export async function POST(request: NextRequest) {
             properties,
         })
 
+        // Send confirmation email
+        const { error: emailError } = await resend.emails.send({
+            from: 'AlgoPattern <hello@updates.algopattern.dev>',
+            to: [email],
+            replyTo: 'algopattern.dev@gmail.com',
+            subject: 'Your AlgoPattern beta access',
+            html: betaAccessEmailHtml(name),
+        })
+
+        if (emailError) {
+            console.error('Failed to send confirmation email:', emailError)
+        }
+
         return NextResponse.json({
             success: true,
             id: response.id,
-            message: 'Successfully added to waitlist!'
+            message: 'Successfully added to list!'
         })
 
     } catch (error) {
@@ -284,7 +301,7 @@ export async function POST(request: NextRequest) {
         }
 
         return NextResponse.json(
-            { error: 'Failed to add to waitlist. Please try again.' },
+            { error: 'Failed to add to list. Please try again.' },
             { status: 500 }
         )
     }

@@ -9,12 +9,12 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Textarea } from "@/components/ui/textarea"
 import { useToast } from "@/hooks/use-toast"
 
-interface WaitlistModalProps {
+interface SignupModalProps {
     isOpen: boolean
     onClose: () => void
 }
 
-export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
+export function SignupModal({ isOpen, onClose }: SignupModalProps) {
     const [formData, setFormData] = useState({
         name: "",
         email: "",
@@ -59,7 +59,7 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
                     comments: ""
                 })
                 toast({
-                    title: "Thanks for joining the waitlist! 🎉",
+                    title: "You're on the list! 🎉",
                     description: "We'll be in touch soon.",
                 })
             } else {
@@ -69,15 +69,15 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
                 // Handle duplicate email case specially
                 if (response.status === 409) {
                     toast({
-                        title: "You're already on the list! 📧",
-                        description: result.error || "This email is already on our waitlist.",
+                        title: "You're already on the list!",
+                        description: result.error || "This email is already registered.",
                         variant: "default",
                     })
                     onClose()
                 } else {
                     toast({
                         title: "Oops! Something went wrong",
-                        description: result.error || 'Failed to join waitlist. Please try again.',
+                        description: result.error || 'Failed to join. Please try again.',
                         variant: "destructive",
                     })
                 }
@@ -98,7 +98,7 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
         <Dialog open={isOpen} onOpenChange={onClose}>
             <DialogContent className="sm:max-w-md max-h-[90vh] overflow-y-auto">
                 <DialogHeader>
-                    <DialogTitle className="text-2xl font-bold text-center">Join the Waitlist</DialogTitle>
+                    <DialogTitle className="text-2xl font-bold text-center">Join the Beta</DialogTitle>
                     <DialogDescription className="text-center">
                         Help us build the perfect DSA learning experience for you
                     </DialogDescription>
@@ -280,7 +280,7 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
                     {/* Submit Button */}
                     <div className="flex justify-end">
                         <Button type="submit" disabled={isSubmitting}>
-                            {isSubmitting ? "Joining..." : "Join Waitlist"}
+                            {isSubmitting ? "Joining..." : "Join Beta"}
                         </Button>
                     </div>
 

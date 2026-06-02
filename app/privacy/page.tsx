@@ -20,7 +20,7 @@ export default function PrivacyPage() {
 
       <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 max-w-3xl">
         <h1 className="text-4xl font-bold text-foreground mb-2">Privacy Policy</h1>
-        <p className="text-muted-foreground mb-12">Last updated: May 31, 2026</p>
+        <p className="text-muted-foreground mb-12">Last updated: June 1, 2026</p>
 
         <div className="space-y-10 text-foreground">
 
@@ -28,7 +28,7 @@ export default function PrivacyPage() {
             <h2 className="text-xl font-semibold mb-3">Overview</h2>
             <p className="text-muted-foreground leading-relaxed">
               AlgoPattern ("we", "us", or "our") operates the website at algopattern.dev and the AlgoPattern mobile
-              app. This policy explains what information we collect when you visit our site, join our waitlist, or use
+              app. This policy explains what information we collect when you visit our site, sign up for our beta, or use
               the app, how we use it, and your rights regarding that information.
             </p>
           </section>
@@ -36,9 +36,9 @@ export default function PrivacyPage() {
           <section>
             <h2 className="text-xl font-semibold mb-3">Information We Collect</h2>
 
-            <h3 className="font-medium mb-2">Waitlist form</h3>
+            <h3 className="font-medium mb-2">Beta signup form</h3>
             <p className="text-muted-foreground leading-relaxed mb-4">
-              When you join our waitlist, we collect:
+              When you sign up for our beta, we collect:
             </p>
             <ul className="list-disc list-inside text-muted-foreground space-y-1 mb-4 ml-2">
               <li>Name and email address</li>
@@ -149,7 +149,7 @@ export default function PrivacyPage() {
               <div>
                 <p className="font-medium text-foreground mb-1">Notion</p>
                 <p className="leading-relaxed">
-                  Waitlist submissions are stored in a Notion database. See{" "}
+                  Beta signup submissions are stored in a Notion database. See{" "}
                   <a
                     href="https://privacycenter.notion.so/policies"
                     className="text-primary hover:underline"
