@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import posthog from "posthog-js"
 import { Button } from "@/components/ui/button"
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
@@ -32,11 +33,22 @@ export function SignupModal({ isOpen, onClose }: SignupModalProps) {
         e.preventDefault()
         setIsSubmitting(true)
 
+        posthog.capture("beta_signup_submitted", {
+            platform: formData.platform,
+            experience: formData.experience,
+            hear_about: formData.hearAbout,
+        })
+
+        const distinctId = posthog.get_distinct_id()
+        const sessionId = posthog.get_session_id()
+
         try {
             const response = await fetch('/api/waitlist', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    'X-POSTHOG-DISTINCT-ID': distinctId ?? '',
+                    'X-POSTHOG-SESSION-ID': sessionId ?? '',
                 },
                 body: JSON.stringify(formData),
             })
@@ -44,6 +56,12 @@ export function SignupModal({ isOpen, onClose }: SignupModalProps) {
             const result = await response.json()
 
             if (response.ok) {
+                posthog.identify(formData.email, {
+                    name: formData.name,
+                    email: formData.email,
+                    platform: formData.platform,
+                    experience: formData.experience,
+                })
                 // Success
                 onClose()
                 // Reset form
@@ -82,6 +100,7 @@ export function SignupModal({ isOpen, onClose }: SignupModalProps) {
             }
         } catch (error) {
             console.error('Network Error:', error)
+            posthog.captureException(error)
             toast({
                 title: "Connection Error",
                 description: 'Network error. Please check your connection and try again.',

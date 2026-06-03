@@ -20,7 +20,7 @@ export default function PrivacyPage() {
 
       <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 max-w-3xl">
         <h1 className="text-4xl font-bold text-foreground mb-2">Privacy Policy</h1>
-        <p className="text-muted-foreground mb-12">Last updated: June 1, 2026</p>
+        <p className="text-muted-foreground mb-12">Last updated: June 3, 2026</p>
 
         <div className="space-y-10 text-foreground">
 
@@ -98,7 +98,7 @@ export default function PrivacyPage() {
             </ul>
 
             <h3 className="font-medium mb-2">Website analytics</h3>
-            <p className="text-muted-foreground leading-relaxed mb-6">
+            <p className="text-muted-foreground leading-relaxed mb-4">
               We use Vercel Analytics to understand site traffic. Vercel Analytics does not use cookies and does not
               store personally identifiable information. It collects anonymized data such as page views, referrer, and
               general device type. See{" "}
@@ -111,6 +111,22 @@ export default function PrivacyPage() {
                 Vercel's privacy documentation
               </a>{" "}
               for details.
+            </p>
+            <p className="text-muted-foreground leading-relaxed mb-3">
+              We also use PostHog on the landing page and signup flow to understand how visitors interact with the
+              site. PostHog collects:
+            </p>
+            <ul className="list-disc list-inside text-muted-foreground space-y-1 mb-4 ml-2">
+              <li>Page view and navigation events</li>
+              <li>Button and CTA click events (e.g., when the signup modal is opened)</li>
+              <li>
+                Signup form submission events
+              </li>
+              <li>Errors and exceptions encountered in the browser</li>
+            </ul>
+            <p className="text-muted-foreground leading-relaxed mb-6">
+              PostHog uses a cookie or local storage to assign you a persistent anonymous identifier before signup.
+              You can opt out of PostHog tracking by enabling "Do Not Track" in your browser.
             </p>
 
             <h3 className="font-medium mb-2">In-app feedback</h3>
@@ -180,8 +196,10 @@ export default function PrivacyPage() {
               <div>
                 <p className="font-medium text-foreground mb-1">PostHog</p>
                 <p className="leading-relaxed">
-                  The app uses PostHog for analytics, session recording, and crash reporting. PostHog receives
-                  screen views, lifecycle events, custom usage events, session recordings, and crash data. See{" "}
+                  We use PostHog for analytics on both the website and the app. On the website, PostHog receives
+                  page interaction events, signup form metadata, and — after a successful signup — your email and
+                  name for identity linking. In the app, PostHog receives screen views, lifecycle events, custom
+                  usage events, session recordings, and crash data. See{" "}
                   <a
                     href="https://posthog.com/privacy"
                     className="text-primary hover:underline"

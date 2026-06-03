@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { Client } from '@notionhq/client'
 import { Resend } from 'resend'
 import { betaAccessEmailHtml } from '@/emails/beta-access-email'
+import { getPostHogClient } from '@/lib/posthog-server'
 
 const notion = new Client({
     auth: process.env.NOTION_API_KEY,
@@ -111,6 +112,13 @@ export async function POST(request: NextRequest) {
         // Check if email already exists in the database
         const emailExists = await checkEmailExists(NOTION_DATABASE_ID, email)
         if (emailExists) {
+            const distinctId = request.headers.get('X-POSTHOG-DISTINCT-ID') || email
+            const posthog = getPostHogClient()
+            posthog.capture({
+                distinctId,
+                event: 'beta_signup_duplicate_email',
+                properties: { email },
+            })
             return NextResponse.json(
                 { error: 'This email is already on our list! Thanks for your interest.' },
                 { status: 409 }
@@ -254,6 +262,32 @@ export async function POST(request: NextRequest) {
             console.error('Failed to send confirmation email:', emailError)
         }
 
+        const distinctId = request.headers.get('X-POSTHOG-DISTINCT-ID') || email
+        const sessionId = request.headers.get('X-POSTHOG-SESSION-ID') || undefined
+        const posthog = getPostHogClient()
+        posthog.identify({
+            distinctId,
+            properties: {
+                name,
+                email,
+                platform: platformMap[platform] || platform || undefined,
+                experience: experienceMap[experience] || experience || undefined,
+                $session_id: sessionId,
+            },
+        })
+        posthog.capture({
+            distinctId,
+            event: 'beta_signup_completed',
+            properties: {
+                email,
+                platform: platformMap[platform] || platform || undefined,
+                experience: experienceMap[experience] || experience || undefined,
+                hear_about: hearAboutMap[hearAbout] || hearAbout || undefined,
+                country,
+                $session_id: sessionId,
+            },
+        })
+
         return NextResponse.json({
             success: true,
             id: response.id,
@@ -262,6 +296,19 @@ export async function POST(request: NextRequest) {
 
     } catch (error) {
         console.error('Error adding to Notion database:', error)
+
+        try {
+            const posthog = getPostHogClient()
+            posthog.capture({
+                distinctId: 'server',
+                event: 'beta_signup_failed',
+                properties: {
+                    error: error instanceof Error ? error.message : String(error),
+                },
+            })
+        } catch {
+            // ignore telemetry errors
+        }
 
         // Provide more specific error messages
         if (error instanceof Error) {
