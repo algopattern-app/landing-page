@@ -3,6 +3,7 @@ import { Client } from '@notionhq/client'
 import { Resend } from 'resend'
 import { betaAccessEmailHtml } from '@/emails/beta-access-email'
 import { getPostHogClient } from '@/lib/posthog-server'
+import { buildOptionalNotionProperties, experienceMap, platformMap } from '@/lib/notion-waitlist'
 
 const notion = new Client({
     auth: process.env.NOTION_API_KEY,
@@ -145,102 +146,21 @@ export async function POST(request: NextRequest) {
             }
         }
 
-        // Map form values to Notion database schema
-        const experienceMap: { [key: string]: string } = {
-            'beginner': 'Beginner',
-            'intermediate': 'Intermediate',
-            'advanced': 'Advanced'
-        }
-
-        const platformMap: { [key: string]: string } = {
-            'ios': 'iOS',
-            'android': 'Android',
-        }
-
-        const hearAboutMap: { [key: string]: string } = {
-            'youtube': 'YouTube',
-            'instagram': 'Instagram',
-            'search': 'Search',
-            'other': 'Other'
-        }
-
         // Create the page properties
         const properties: any = {
             'Name': {
-                title: [
-                    {
-                        text: {
-                            content: name,
-                        },
-                    },
-                ],
+                title: [{ text: { content: name } }],
             },
             'Email': {
                 email: email,
             },
             'Submitted at': {
-                date: {
-                    start: new Date().toISOString(),
-                },
+                date: { start: new Date().toISOString() },
             },
             'Country': {
-                rich_text: [
-                    {
-                        text: {
-                            content: country,
-                        },
-                    },
-                ],
+                rich_text: [{ text: { content: country } }],
             },
-        }
-
-        // Add optional properties only if they exist
-        if (platform) {
-            properties['Platform'] = {
-                select: {
-                    name: platformMap[platform] || platform,
-                },
-            }
-        }
-
-        if (experience) {
-            properties['Experience'] = {
-                select: {
-                    name: experienceMap[experience] || experience,
-                },
-            }
-        }
-
-        if (struggle) {
-            properties['Biggest struggle'] = {
-                rich_text: [
-                    {
-                        text: {
-                            content: struggle,
-                        },
-                    },
-                ],
-            }
-        }
-
-        if (hearAbout) {
-            properties['Hear about'] = {
-                select: {
-                    name: hearAboutMap[hearAbout] || hearAbout,
-                },
-            }
-        }
-
-        if (comments) {
-            properties['Additional comments'] = {
-                rich_text: [
-                    {
-                        text: {
-                            content: comments,
-                        },
-                    },
-                ],
-            }
+            ...buildOptionalNotionProperties({ platform, experience, struggle, hearAbout, comments }),
         }
 
         // Create the page using the determined parent configuration
@@ -277,12 +197,9 @@ export async function POST(request: NextRequest) {
         })
         posthog.capture({
             distinctId,
-            event: 'beta_signup_completed',
+            event: 'beta_signup_step1_completed',
             properties: {
                 email,
-                platform: platformMap[platform] || platform || undefined,
-                experience: experienceMap[experience] || experience || undefined,
-                hear_about: hearAboutMap[hearAbout] || hearAbout || undefined,
                 country,
                 $session_id: sessionId,
             },
