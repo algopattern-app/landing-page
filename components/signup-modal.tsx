@@ -100,7 +100,8 @@ export function SignupModal({ isOpen, onClose }: SignupModalProps) {
     const handleStep2Submit = async (e: React.FormEvent) => {
         e.preventDefault()
         if (!notionPageId) {
-            handleStep2Skip()
+            toast({ title: "You're on the list! 🎉", description: "We'll be in touch soon." })
+            resetAndClose()
             return
         }
         setIsSubmitting(true)
@@ -134,15 +135,6 @@ export function SignupModal({ isOpen, onClose }: SignupModalProps) {
             setIsSubmitting(false)
         }
 
-        toast({
-            title: "You're on the list! 🎉",
-            description: "We'll be in touch soon.",
-        })
-        resetAndClose()
-    }
-
-    const handleStep2Skip = () => {
-        posthog.capture("beta_signup_step2_skipped")
         toast({
             title: "You're on the list! 🎉",
             description: "We'll be in touch soon.",
