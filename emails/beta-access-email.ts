@@ -25,10 +25,6 @@ export function betaAccessEmailHtml(name?: string): string {
                 <strong>Android (Google Play testing):</strong><br />
                 <a href="https://play.google.com/store/apps/details?id=com.algopattern.app">https://play.google.com/store/apps/details?id=com.algopattern.app</a>
             </p>
-            <span>
-                Note: Android access may take up to 24 hours to activate.
-                If the link still doesn't work after that, please let me know by replying to this email.
-            </span>
 
             <p>What I'd love feedback on:</p>
             <ul>
