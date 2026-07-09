@@ -97,16 +97,22 @@ export function SignupModal({ isOpen, onClose }: SignupModalProps) {
         }
     }
 
-    const handleStep2Submit = async (e: React.FormEvent) => {
-        e.preventDefault()
-        if (!notionPageId) {
-            toast({ title: "You're on the list! 🎉", description: "We'll be in touch soon." })
-            resetAndClose()
-            return
-        }
-        setIsSubmitting(true)
+    const hasStep2Data = () =>
+        Boolean(
+            formData.platform ||
+            formData.experience ||
+            formData.struggle ||
+            formData.hearAbout ||
+            formData.comments
+        )
 
-        posthog.capture("beta_signup_step2_submitted", {
+    // Sends whatever is currently filled in on step 2 to the API.
+    // Reads formData synchronously so it's safe to fire-and-forget while closing.
+    // `trigger` distinguishes an explicit Submit from an abandoned (clicked-off) modal.
+    const saveStep2Data = async (trigger: 'submitted' | 'abandoned') => {
+        if (!notionPageId) return
+
+        posthog.capture(`beta_signup_step2_${trigger}`, {
             platform: formData.platform,
             experience: formData.experience,
             hear_about: formData.hearAbout,
@@ -131,9 +137,19 @@ export function SignupModal({ isOpen, onClose }: SignupModalProps) {
             })
         } catch {
             // Step 2 failure is silent — user is already signed up
-        } finally {
-            setIsSubmitting(false)
         }
+    }
+
+    const handleStep2Submit = async (e: React.FormEvent) => {
+        e.preventDefault()
+        if (!notionPageId) {
+            toast({ title: "You're on the list! 🎉", description: "We'll be in touch soon." })
+            resetAndClose()
+            return
+        }
+        setIsSubmitting(true)
+        await saveStep2Data('submitted')
+        setIsSubmitting(false)
 
         toast({
             title: "You're on the list! 🎉",
@@ -142,8 +158,18 @@ export function SignupModal({ isOpen, onClose }: SignupModalProps) {
         resetAndClose()
     }
 
+    // Dismissing the modal (click outside, escape, close button) should still
+    // capture anything the user typed on step 2 before closing.
+    const handleOpenChange = (open: boolean) => {
+        if (open) return
+        if (step === 'step2' && notionPageId && hasStep2Data()) {
+            void saveStep2Data('abandoned')
+        }
+        resetAndClose()
+    }
+
     return (
-        <Dialog open={isOpen} onOpenChange={(open) => { if (!open) resetAndClose() }}>
+        <Dialog open={isOpen} onOpenChange={handleOpenChange}>
             <DialogContent className="sm:max-w-md max-h-[90vh] overflow-y-auto">
                 <DialogHeader>
                     <DialogTitle className="text-2xl font-bold text-center">
