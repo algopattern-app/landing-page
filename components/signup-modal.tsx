@@ -149,11 +149,9 @@ export function SignupModal({ isOpen, onClose }: SignupModalProps) {
                     <DialogTitle className="text-2xl font-bold text-center">
                         {step === 'step1' ? 'Join the Beta' : "You're in! 🎉"}
                     </DialogTitle>
-                    <DialogDescription className="text-center">
-                        {step === 'step1'
-                            ? 'Help us build the perfect DSA learning experience for you'
-                            : 'Check your email for beta access. While you\'re here, help us build a better app:'}
-                    </DialogDescription>
+                    {step === 'step2' ? <DialogDescription className="text-center">
+                        Help us build the perfect DSA learning experience for you
+                    </DialogDescription> : null}
                 </DialogHeader>
 
                 {/* Step indicator */}
