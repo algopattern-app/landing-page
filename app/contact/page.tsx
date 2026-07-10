@@ -1,5 +1,5 @@
-import { Button } from "@/components/ui/button"
 import { Footer } from "@/components/footer"
+import { HeaderCtaButton } from "@/components/cta-button"
 
 export default function ContactPage() {
   return (
@@ -27,7 +27,7 @@ export default function ContactPage() {
               </a>
             </nav>
             <div className="flex items-center space-x-4">
-              <Button>Join Beta</Button>
+              <HeaderCtaButton />
             </div>
           </div>
         </div>
