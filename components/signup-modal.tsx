@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import posthog from "posthog-js"
+import { useFeatureFlagVariantKey } from "posthog-js/react"
 import { Button } from "@/components/ui/button"
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
@@ -30,6 +31,7 @@ export function SignupModal({ isOpen, onClose }: SignupModalProps) {
     const [step, setStep] = useState<'step1' | 'step2'>('step1')
     const [notionPageId, setNotionPageId] = useState<string | null>(null)
     const [isSubmitting, setIsSubmitting] = useState(false)
+    const ctaCopy = useFeatureFlagVariantKey('cta-copy')
     const { toast } = useToast()
 
     const resetAndClose = () => {
@@ -220,7 +222,11 @@ export function SignupModal({ isOpen, onClose }: SignupModalProps) {
 
                         <div className="flex justify-end">
                             <Button type="submit" disabled={isSubmitting}>
-                                {isSubmitting ? "Joining..." : "Join Beta"}
+                                {isSubmitting
+                                    ? "Joining..."
+                                    : ctaCopy === 'test'
+                                        ? 'Get Access'
+                                        : 'Join Beta'}
                             </Button>
                         </div>
                     </form>

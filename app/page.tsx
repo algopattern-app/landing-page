@@ -1,22 +1,11 @@
 "use client"
 
-import { useState } from "react"
-import posthog from "posthog-js"
-import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { Footer } from "@/components/footer"
-import { SignupModal } from "@/components/signup-modal"
-import { ArrowRight, Clock, Gamepad2, BookOpen, Smartphone, Trophy, Zap, Target, ChevronDown } from "lucide-react"
+import { Clock, Gamepad2, BookOpen, Smartphone, Trophy, Zap, Target, ChevronDown } from "lucide-react"
+import { HeaderCtaButton, MainCtaButton } from "@/components/cta-button"
 
 export default function HomePage() {
-  const [isSignupModalOpen, setIsSignupModalOpen] = useState(false)
-
-  const openSignupModal = (source: string) => {
-    posthog.capture("cta_clicked", { source })
-    posthog.capture("signup_modal_opened", { source })
-    setIsSignupModalOpen(true)
-  }
-
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
@@ -39,8 +28,7 @@ export default function HomePage() {
               </a>
             </nav>
             <div className="flex items-center space-x-4">
-
-              <Button onClick={() => openSignupModal("header")}>Join Beta</Button>
+              <HeaderCtaButton />
             </div>
           </div>
         </div>
@@ -57,10 +45,7 @@ export default function HomePage() {
               A Duolingo-style app for data structures &amp; algorithms. Build intuition, sharpen your problem-solving skills, and recognize patterns that unlock LeetCode problems.
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
-              <Button size="lg" className="px-8 py-4 text-lg font-semibold" onClick={() => openSignupModal("hero")}>
-                Join the Beta
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
+              <MainCtaButton source="hero" />
             </div>
           </div>
         </div>
@@ -310,22 +295,13 @@ export default function HomePage() {
               <br></br>
               Join to get access and help shape the app with your feedback.
             </p>
-            <Button size="lg" className="px-8 py-4 text-lg font-semibold" onClick={() => openSignupModal("cta_section")}>
-              Join the Beta
-              <ArrowRight className="ml-2 h-5 w-5" />
-            </Button>
+            <MainCtaButton source="cta_section" />
           </div>
         </div>
       </section>
 
       {/* Footer */}
       <Footer />
-
-      {/* Signup Modal */}
-      <SignupModal
-        isOpen={isSignupModalOpen}
-        onClose={() => setIsSignupModalOpen(false)}
-      />
     </div>
   )
 }
