@@ -5,6 +5,7 @@ import { useFeatureFlagVariantKey } from "posthog-js/react";
 import { Button } from "./ui/button";
 import { useState } from "react";
 import { ArrowRight } from "lucide-react";
+import { SignupModal } from "./signup-modal";
 
 export function HeaderCtaButton() {
 
@@ -18,15 +19,18 @@ export function HeaderCtaButton() {
     }
 
     return (
-        <Button onClick={() => openSignupModal("header")}>
-            {ctaCopy === 'test'
-                ? 'Get Early Access'
-                : 'Join Beta'}
-        </Button>
+        <>
+            <Button onClick={() => openSignupModal("header")}>
+                {ctaCopy === 'test'
+                    ? 'Get Early Access'
+                    : 'Join Beta'}
+            </Button>
+            <SignupModal isOpen={isSignupModalOpen} onClose={() => setIsSignupModalOpen(false)} />
+        </>
     );
 }
 
-export function MainCtaButton() {
+export function MainCtaButton({ source }: { source: string }) {
 
     const [isSignupModalOpen, setIsSignupModalOpen] = useState(false)
     const ctaCopy = useFeatureFlagVariantKey('cta-copy')
@@ -38,11 +42,14 @@ export function MainCtaButton() {
     }
 
     return (
-        <Button size="lg" className="px-8 py-4 text-lg font-semibold" onClick={() => openSignupModal("hero")}>
-            {ctaCopy === 'test'
-                ? 'Get Early Access'
-                : 'Join the Beta'}
-            <ArrowRight className="ml-2 h-5 w-5" />
-        </Button>
+        <>
+            <Button size="lg" className="px-8 py-4 text-lg font-semibold" onClick={() => openSignupModal(source)}>
+                {ctaCopy === 'test'
+                    ? 'Get Early Access'
+                    : 'Join the Beta'}
+                <ArrowRight className="ml-2 h-5 w-5" />
+            </Button>
+            <SignupModal isOpen={isSignupModalOpen} onClose={() => setIsSignupModalOpen(false)} />
+        </>
     );
 }
