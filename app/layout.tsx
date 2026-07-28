@@ -11,10 +11,13 @@ const nunito = Nunito({
   variable: "--font-nunito",
 })
 
+const description =
+  "AlgoPattern is a mobile app for coding interview prep. Practice algorithm patterns in bite-sized sessions and build intuition for LeetCode problems."
+
 export const metadata: Metadata = {
+  metadataBase: new URL("https://algopattern.dev"),
   title: "AlgoPattern - Master Coding Interview Patterns",
-  description:
-    "AlgoPattern is a mobile app for coding interview prep. Practice algorithm patterns in bite-sized sessions and build intuition for LeetCode problems.",
+  description,
   keywords: [
     "coding interview",
     "coding interview patterns",
@@ -39,7 +42,26 @@ export const metadata: Metadata = {
     apple: [
       { url: "/images/apple-icon.png", sizes: "180x180", type: "image/png" }
     ],
-  }
+  },
+  openGraph: {
+    type: "website",
+    url: "/",
+    siteName: "AlgoPattern",
+    title: "Master Coding Interview Patterns, 5 Minutes at a Time",
+    description,
+    locale: "en_US",
+    images: [
+      {
+        url: "/images/og.png",
+        width: 1200,
+        height: 630,
+        alt: "AlgoPattern - daily pattern practice for coding interviews",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+  },
 }
 
 export default function RootLayout({
