@@ -47,7 +47,7 @@ export const metadata: Metadata = {
     type: "website",
     url: "/",
     siteName: "AlgoPattern",
-    title: "Master Coding Interview Patterns, 5 Minutes at a Time",
+    title: "AlgoPattern - Master Coding Interview Patterns",
     description,
     locale: "en_US",
     images: [
