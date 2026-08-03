@@ -1,5 +1,4 @@
 import { Footer } from "@/components/footer"
-import { HeaderCtaButton } from "@/components/cta-button"
 
 export default function ContactPage() {
   return (
@@ -7,7 +6,7 @@ export default function ContactPage() {
       {/* Header */}
       <header className="border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex h-16 items-center justify-between">
+          <div className="flex h-16 items-center justify-center md:justify-between">
             <div className="flex items-center space-x-2">
               <img src="/images/icon.svg" alt="AlgoPattern logo" className="h-8 w-8 object-contain" />
               <span className="font-bold text-xl text-foreground">AlgoPattern</span>
@@ -26,9 +25,6 @@ export default function ContactPage() {
                 FAQ
               </a>
             </nav>
-            <div className="flex items-center space-x-4">
-              <HeaderCtaButton />
-            </div>
           </div>
         </div>
       </header>

@@ -3,7 +3,6 @@ import type { Metadata } from "next"
 import { Nunito } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import { Suspense } from "react"
-import { Toaster } from "@/components/ui/toaster"
 import "./globals.css"
 
 const nunito = Nunito({
@@ -74,7 +73,6 @@ export default function RootLayout({
       <body className={`font-sans ${nunito.variable}`}>
         <Suspense fallback={null}>{children}</Suspense>
         <Analytics />
-        <Toaster />
       </body>
     </html>
   )

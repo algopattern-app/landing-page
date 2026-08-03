@@ -3,7 +3,7 @@
 import { Card } from "@/components/ui/card"
 import { Footer } from "@/components/footer"
 import { Clock, Gamepad2, BookOpen, Smartphone, Trophy, Zap, Target, ChevronDown } from "lucide-react"
-import { HeaderCtaButton, MainCtaButton } from "@/components/cta-button"
+import { StoreBadges } from "@/components/store-badges"
 
 export default function HomePage() {
   return (
@@ -11,7 +11,7 @@ export default function HomePage() {
       {/* Header */}
       <header className="bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex h-16 items-center justify-between">
+          <div className="flex h-16 items-center justify-center md:justify-between">
             <div className="flex items-center space-x-2">
               <img src="/images/icon.svg" alt="AlgoPattern logo" className="h-8 w-8 object-contain" />
               <span className="font-bold text-xl text-foreground">AlgoPattern</span>
@@ -27,9 +27,6 @@ export default function HomePage() {
                 FAQ
               </a>
             </nav>
-            <div className="flex items-center space-x-4">
-              <HeaderCtaButton />
-            </div>
           </div>
         </div>
       </header>
@@ -44,8 +41,8 @@ export default function HomePage() {
             <p className="mt-6 text-lg leading-8 text-muted-foreground max-w-2xl mx-auto text-pretty">
               A Duolingo-style app for data structures &amp; algorithms. Build intuition, sharpen your problem-solving skills, and recognize patterns that unlock LeetCode problems.
             </p>
-            <div className="mt-10 flex items-center justify-center gap-x-6">
-              <MainCtaButton source="hero" />
+            <div className="mt-10">
+              <StoreBadges source="hero" />
             </div>
           </div>
         </div>
@@ -271,12 +268,12 @@ export default function HomePage() {
             <Card className="p-6 border-border/50">
               <details className="group">
                 <summary className="flex items-center justify-between cursor-pointer list-none">
-                  <h3 className="text-lg font-semibold text-foreground">When will the app be available?</h3>
+                  <h3 className="text-lg font-semibold text-foreground">Where can I get the app?</h3>
                   <ChevronDown className="h-5 w-5 text-muted-foreground group-open:rotate-180 transition-transform" />
                 </summary>
                 <div className="mt-4 text-muted-foreground leading-relaxed">
                   <p>
-                    AlgoPattern is currently in beta! Join today to get access and help shape the app's features with your feedback.
+                    AlgoPattern is out now on the App Store and Google Play. Download it for free and start with your first pattern in under five minutes.
                   </p>
                 </div>
               </details>
@@ -291,11 +288,11 @@ export default function HomePage() {
           <div className="mx-auto max-w-2xl text-center">
             <h2 className="text-4xl font-extrabold text-foreground mb-4">Start Learning Today</h2>
             <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
-              AlgoPattern is currently in beta.
+              AlgoPattern is available on iOS and Android.
               <br></br>
-              Join to get access and help shape the app with your feedback.
+              Download the app and start building pattern intuition today.
             </p>
-            <MainCtaButton source="cta_section" />
+            <StoreBadges source="cta_section" />
           </div>
         </div>
       </section>
