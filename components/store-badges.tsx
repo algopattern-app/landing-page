@@ -2,8 +2,7 @@
 
 import posthog from "posthog-js";
 
-// TODO: replace with the live App Store listing URL once available.
-const APP_STORE_URL = "https://testflight.apple.com/join/NHMTvq5D"
+const APP_STORE_URL = "https://apps.apple.com/us/app/algopattern/id6775235476"
 const GOOGLE_PLAY_URL = "https://play.google.com/store/apps/details?id=com.algopattern.app"
 
 export function StoreBadges({ source }: { source: string }) {
