@@ -32,6 +32,9 @@ export const metadata: Metadata = {
     "algorithm practice",
     "coding practice"
   ],
+  itunes: {
+    appId: "6775235476",
+  },
   icons: {
     icon: [
       { url: "/images/icon.svg", type: "image/svg+xml" },
