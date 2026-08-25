@@ -3,7 +3,7 @@
 import { Card } from "@/components/ui/card"
 import { Footer } from "@/components/footer"
 import { Clock, Gamepad2, BookOpen, Smartphone, Trophy, Zap, Target, ChevronDown } from "lucide-react"
-import { StoreBadges } from "@/components/store-badges"
+import { StoreBadges, APP_STORE_URL, GOOGLE_PLAY_URL } from "@/components/store-badges"
 
 export default function HomePage() {
   return (
@@ -69,7 +69,7 @@ export default function HomePage() {
               <div>
                 <h3 className="text-xl font-semibold mb-4 text-foreground">Practicing LeetCode on mobile is clunky.</h3>
                 <p className="text-muted-foreground mb-6 leading-relaxed">
-                  Most apps force you to type code on a tiny screen. But interviews aren't just about syntax — they're
+                  Most apps force you to type code on a tiny screen. But interviews aren't just about syntax; they're
                   about recognizing patterns fast.
                 </p>
                 <div className="space-y-4">
@@ -273,7 +273,27 @@ export default function HomePage() {
                 </summary>
                 <div className="mt-4 text-muted-foreground leading-relaxed">
                   <p>
-                    AlgoPattern is out now on the App Store and Google Play. Download it for free and start with your first pattern in under five minutes.
+                    AlgoPattern is out now on the{" "}
+                    <a
+                      href={APP_STORE_URL}
+                      target="_blank"
+                      rel="noopener"
+                      onClick={() => posthog.capture("store_badge_clicked", { source: "faq", store: "app_store" })}
+                      className="text-primary underline underline-offset-4 hover:opacity-80 transition-opacity"
+                    >
+                      App Store
+                    </a>{" "}
+                    and{" "}
+                    <a
+                      href={GOOGLE_PLAY_URL}
+                      target="_blank"
+                      rel="noopener"
+                      onClick={() => posthog.capture("store_badge_clicked", { source: "faq", store: "google_play" })}
+                      className="text-primary underline underline-offset-4 hover:opacity-80 transition-opacity"
+                    >
+                      Google Play
+                    </a>
+                    . Download it for free and start with your first pattern in under five minutes.
                   </p>
                 </div>
               </details>

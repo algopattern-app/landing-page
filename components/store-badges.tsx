@@ -2,8 +2,8 @@
 
 import posthog from "posthog-js";
 
-const APP_STORE_URL = "https://apps.apple.com/us/app/algopattern/id6775235476"
-const GOOGLE_PLAY_URL = "https://play.google.com/store/apps/details?id=com.algopattern.app"
+export const APP_STORE_URL = "https://apps.apple.com/us/app/algopattern/id6775235476"
+export const GOOGLE_PLAY_URL = "https://play.google.com/store/apps/details?id=com.algopattern.app"
 
 export function StoreBadges({ source }: { source: string }) {
     const trackClick = (store: "app_store" | "google_play") => {
