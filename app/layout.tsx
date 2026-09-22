@@ -15,7 +15,7 @@ const description =
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://algopattern.dev"),
-  title: "AlgoPattern - Master Coding Interview Patterns",
+  title: "AlgoPattern | Master Coding Interview Patterns",
   description,
   keywords: [
     "coding interview",
@@ -49,7 +49,7 @@ export const metadata: Metadata = {
     type: "website",
     url: "/",
     siteName: "AlgoPattern",
-    title: "AlgoPattern - Master Coding Interview Patterns",
+    title: "AlgoPattern | Master Coding Interview Patterns",
     description,
     locale: "en_US",
     images: [
