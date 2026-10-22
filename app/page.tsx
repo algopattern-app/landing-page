@@ -1,5 +1,6 @@
 "use client"
 
+import posthog from "posthog-js"
 import { Card } from "@/components/ui/card"
 import { Footer } from "@/components/footer"
 import { Clock, Gamepad2, BookOpen, Smartphone, Trophy, Zap, Target, ChevronDown } from "lucide-react"
