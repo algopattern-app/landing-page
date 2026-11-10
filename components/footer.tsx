@@ -8,12 +8,15 @@ export function Footer() {
                         <span className="font-bold text-xl text-foreground">AlgoPattern</span>
                         <span className="text-muted-foreground">© 2026</span>
                     </div>
-                    <div className="flex items-center space-x-6">
+                    <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
                         <a href="/terms" className="text-muted-foreground hover:text-foreground transition-colors">
                             Terms
                         </a>
                         <a href="/privacy" className="text-muted-foreground hover:text-foreground transition-colors">
                             Privacy Policy
+                        </a>
+                        <a href="https://api.algopattern.app/" className="text-muted-foreground hover:text-foreground transition-colors">
+                            API Docs
                         </a>
                         <a href="/contact" className="text-muted-foreground hover:text-foreground transition-colors">
                             Contact
