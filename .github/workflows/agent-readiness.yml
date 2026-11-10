@@ -1,0 +1,21 @@
+name: Agent readiness
+on: [push, pull_request]
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - run: |
+          npm start > /tmp/next.log 2>&1 &
+          trap 'kill $!' EXIT
+          for attempt in $(seq 1 30); do
+            if curl -fsS http://localhost:3000/api/v1/discovery > /dev/null; then break; fi
+            sleep 1
+          done
+          npm run test:agents
