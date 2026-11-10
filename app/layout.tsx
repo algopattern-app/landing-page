@@ -14,7 +14,7 @@ const description =
   "AlgoPattern is a mobile app for coding interview prep. Practice algorithm patterns in bite-sized sessions and build intuition for LeetCode problems."
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://algopattern.dev"),
+  metadataBase: new URL("https://algopattern.app"),
   title: "AlgoPattern | Master Coding Interview Patterns",
   description,
   keywords: [
