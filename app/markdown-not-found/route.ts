@@ -2,7 +2,7 @@ const body = `# 404: Page not found
 
 The requested page does not exist on AlgoPattern.
 
-Visit the [API documentation](https://api.algopattern.app/) or the [sitemap](https://algopattern.app/sitemap.xml) to find available pages.
+Visit the [homepage](https://algopattern.app/) or the [sitemap](https://algopattern.app/sitemap.xml) to find available pages.
 `
 
 export function GET() {
