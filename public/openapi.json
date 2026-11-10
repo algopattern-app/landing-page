@@ -1,0 +1,850 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "AlgoPattern API",
+    "version": "1.0.0",
+    "description": "Endpoint reference. For tokens, rate limits, errors, and permitted use, see the \n[documentation](https://api.algopattern.app/).\n\nEach endpoint lists only its own responses. Every endpoint can also return `401`\n(invalid token), `429` (rate limited) and `500`, described under\n[Errors](https://api.algopattern.app/#errors).\n\nAccount requests allow 60 requests per minute per token. Honor Retry-After on 429. Public discovery requires no token and can be cached for one hour.\n",
+    "termsOfService": "https://algopattern.app/terms",
+    "contact": {
+      "email": "algopattern.dev@gmail.com"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://api.algopattern.app/v1"
+    }
+  ],
+  "security": [
+    {
+      "personalAccessToken": []
+    }
+  ],
+  "tags": [
+    {
+      "name": "Account",
+      "description": "The account and token behind a request."
+    },
+    {
+      "name": "Streak",
+      "description": "Whether your streak is alive, and today's progress."
+    },
+    {
+      "name": "XP",
+      "description": "Your XP and leaderboard ranks."
+    },
+    {
+      "name": "Activity",
+      "description": "Your day-by-day history."
+    },
+    {
+      "name": "Discovery",
+      "description": "Public integration capabilities; no token required."
+    }
+  ],
+  "paths": {
+    "/me": {
+      "get": {
+        "tags": [
+          "Account"
+        ],
+        "operationId": "getAccount",
+        "summary": "Get account",
+        "description": "The account and token making the request. Cheap: use it to check a token, for example\nin an integration's setup flow.\n",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccountResponse"
+                },
+                "example": {
+                  "account": {
+                    "user_id": "0fd87d81-6878-4096-b24e-f11e4a838c87",
+                    "username": "ada",
+                    "token": {
+                      "name": "Home Assistant",
+                      "prefix": "ap_pat_0XXgG",
+                      "created_at": "2026-10-31T03:51:46Z"
+                    }
+                  },
+                  "as_of": "2026-10-30T19:05:12Z"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Missing, invalid or revoked token.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limited; wait for Retry-After seconds.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {
+              "Retry-After": {
+                "description": "Seconds to wait before retrying.",
+                "schema": {
+                  "type": "integer",
+                  "minimum": 0
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/me/streak": {
+      "get": {
+        "tags": [
+          "Streak"
+        ],
+        "operationId": "getStreak",
+        "summary": "Get streak",
+        "description": "Your streak and today's progress.\n\nDays are the account's local days, in the timezone reported in `timezone`. A day you\nmissed is bridged by a streak freeze, if you have one, when the next request after it is\nmade, here or in the app.\n",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StreakResponse"
+                },
+                "example": {
+                  "streak": {
+                    "timezone": "Europe/Paris",
+                    "today": "2026-10-30",
+                    "current": 42,
+                    "daily_quiz_completed_today": true,
+                    "active_today": true,
+                    "freezes_available": 1
+                  },
+                  "as_of": "2026-10-30T19:05:12Z"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Missing, invalid or revoked token.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limited; wait for Retry-After seconds.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {
+              "Retry-After": {
+                "description": "Seconds to wait before retrying.",
+                "schema": {
+                  "type": "integer",
+                  "minimum": 0
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/me/xp": {
+      "get": {
+        "tags": [
+          "XP"
+        ],
+        "operationId": "getXp",
+        "summary": "Get XP",
+        "description": "Your XP and leaderboard ranks.\n\nThe weekly figures use the leaderboard's week, which starts Monday 00:00 UTC for everyone,\nwherever you are.\n",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/XpResponse"
+                },
+                "example": {
+                  "xp": {
+                    "total_xp": 2650,
+                    "this_week": 125,
+                    "week_start": "2026-10-26",
+                    "weekly_rank": 3,
+                    "all_time_rank": 4
+                  },
+                  "as_of": "2026-10-30T19:05:12Z"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Missing, invalid or revoked token.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limited; wait for Retry-After seconds.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {
+              "Retry-After": {
+                "description": "Seconds to wait before retrying.",
+                "schema": {
+                  "type": "integer",
+                  "minimum": 0
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/me/activity": {
+      "get": {
+        "tags": [
+          "Activity"
+        ],
+        "operationId": "getActivity",
+        "summary": "Get activity",
+        "description": "Your activity, day by day.\n\nOne entry for every day in the range, oldest first, including days with no activity.\nDays are the account's local days.\n\nWith no parameters you get the last 30 days. A range can cover up to 366 days; for more,\nmake several requests.\n\nPast days don't change, so fetch them once and keep them.\n",
+        "parameters": [
+          {
+            "name": "from",
+            "in": "query",
+            "description": "First day of the range. Defaults to 29 days before `to`.",
+            "schema": {
+              "type": "string",
+              "format": "date",
+              "example": "2026-01-01"
+            }
+          },
+          {
+            "name": "to",
+            "in": "query",
+            "description": "Last day of the range. Defaults to today. A date after today is treated as today; the response's `to` says which day was used.\n",
+            "schema": {
+              "type": "string",
+              "format": "date",
+              "example": "2026-10-30"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActivityResponse"
+                },
+                "example": {
+                  "activity": {
+                    "timezone": "Europe/Paris",
+                    "from": "2026-10-26",
+                    "to": "2026-10-30",
+                    "days": [
+                      {
+                        "date": "2026-10-26",
+                        "status": "active",
+                        "xp_earned": 25
+                      },
+                      {
+                        "date": "2026-10-27",
+                        "status": "active",
+                        "xp_earned": 30
+                      },
+                      {
+                        "date": "2026-10-28",
+                        "status": "none",
+                        "xp_earned": 0
+                      },
+                      {
+                        "date": "2026-10-29",
+                        "status": "frozen",
+                        "xp_earned": 0
+                      },
+                      {
+                        "date": "2026-10-30",
+                        "status": "active",
+                        "xp_earned": 50
+                      }
+                    ],
+                    "range": {
+                      "days_active": 3,
+                      "xp_earned": 105
+                    },
+                    "lifetime": {
+                      "days_active": 96,
+                      "first_active_date": "2026-06-30",
+                      "last_active_date": "2026-10-30"
+                    }
+                  },
+                  "as_of": "2026-10-30T19:05:12Z"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/InvalidRequest"
+          },
+          "401": {
+            "description": "Missing, invalid or revoked token.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limited; wait for Retry-After seconds.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {
+              "Retry-After": {
+                "description": "Seconds to wait before retrying.",
+                "schema": {
+                  "type": "integer",
+                  "minimum": 0
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/discovery": {
+      "servers": [
+        {
+          "url": "https://algopattern.app"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Discovery"
+        ],
+        "operationId": "getDiscovery",
+        "summary": "Discover AlgoPattern integrations",
+        "description": "Get public product capabilities and official API links before configuring a personal integration. Contains no account data. Cache for one hour.",
+        "security": [],
+        "responses": {
+          "200": {
+            "description": "Public integration metadata",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Discovery"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "personalAccessToken": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "ap_pat_<43 base64url chars>",
+        "description": "Personal access token created in the app."
+      }
+    },
+    "responses": {
+      "InvalidRequest": {
+        "description": "A query parameter is malformed, or the range is invalid.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            },
+            "example": {
+              "error": {
+                "code": "invalid_request",
+                "message": "The range can cover at most 366 days."
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "AccountResponse": {
+        "type": "object",
+        "required": [
+          "account",
+          "as_of"
+        ],
+        "properties": {
+          "account": {
+            "$ref": "#/components/schemas/Account"
+          },
+          "as_of": {
+            "$ref": "#/components/schemas/AsOf"
+          }
+        }
+      },
+      "StreakResponse": {
+        "type": "object",
+        "required": [
+          "streak",
+          "as_of"
+        ],
+        "properties": {
+          "streak": {
+            "$ref": "#/components/schemas/Streak"
+          },
+          "as_of": {
+            "$ref": "#/components/schemas/AsOf"
+          }
+        }
+      },
+      "XpResponse": {
+        "type": "object",
+        "required": [
+          "xp",
+          "as_of"
+        ],
+        "properties": {
+          "xp": {
+            "$ref": "#/components/schemas/Xp"
+          },
+          "as_of": {
+            "$ref": "#/components/schemas/AsOf"
+          }
+        }
+      },
+      "ActivityResponse": {
+        "type": "object",
+        "required": [
+          "activity",
+          "as_of"
+        ],
+        "properties": {
+          "activity": {
+            "$ref": "#/components/schemas/Activity"
+          },
+          "as_of": {
+            "$ref": "#/components/schemas/AsOf"
+          }
+        }
+      },
+      "Account": {
+        "type": "object",
+        "required": [
+          "user_id",
+          "username",
+          "token"
+        ],
+        "properties": {
+          "user_id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Stable account id. Use it as a unique id; usernames can change."
+          },
+          "username": {
+            "type": "string",
+            "nullable": true,
+            "description": "Public handle, or null if the user hasn't chosen one yet.",
+            "example": "ada"
+          },
+          "token": {
+            "$ref": "#/components/schemas/TokenInfo"
+          }
+        }
+      },
+      "TokenInfo": {
+        "type": "object",
+        "required": [
+          "name",
+          "prefix",
+          "created_at"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Home Assistant"
+          },
+          "prefix": {
+            "type": "string",
+            "description": "First characters of the token, for recognising it.",
+            "example": "ap_pat_Xy3k"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "Streak": {
+        "type": "object",
+        "required": [
+          "timezone",
+          "today",
+          "current",
+          "daily_quiz_completed_today",
+          "active_today",
+          "freezes_available"
+        ],
+        "properties": {
+          "timezone": {
+            "$ref": "#/components/schemas/Timezone"
+          },
+          "today": {
+            "type": "string",
+            "format": "date",
+            "description": "The account's current local date.",
+            "example": "2026-10-30"
+          },
+          "current": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Days in the current streak: the run of consecutive days with activity that ends today or yesterday. Freeze days keep the run going but don't add to the count. The streak is still alive if today isn't done yet.\n",
+            "example": 42
+          },
+          "daily_quiz_completed_today": {
+            "type": "boolean",
+            "description": "Whether today's daily quiz is done."
+          },
+          "active_today": {
+            "type": "boolean",
+            "description": "Whether any session (daily quiz, practice or lesson) was completed today. This is what extends the streak.\n"
+          },
+          "freezes_available": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Streak freezes in reserve. Each one bridges one missed day.",
+            "example": 1
+          }
+        }
+      },
+      "DayStatusValue": {
+        "type": "string",
+        "enum": [
+          "active",
+          "frozen",
+          "none"
+        ],
+        "description": "`active`: at least one session was completed. `frozen`: a missed day bridged by a streak freeze. `none`: neither. Treat values you don't recognise as `none`.\n"
+      },
+      "Xp": {
+        "type": "object",
+        "required": [
+          "total_xp",
+          "this_week",
+          "week_start",
+          "weekly_rank",
+          "all_time_rank"
+        ],
+        "properties": {
+          "total_xp": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Lifetime XP.",
+            "example": 2650
+          },
+          "this_week": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "XP earned since `week_start`, as counted on the weekly leaderboard.",
+            "example": 125
+          },
+          "week_start": {
+            "type": "string",
+            "format": "date",
+            "description": "The Monday (UTC) the leaderboard's current week began.",
+            "example": "2026-10-26"
+          },
+          "weekly_rank": {
+            "type": "integer",
+            "nullable": true,
+            "minimum": 1,
+            "description": "Rank on this week's leaderboard. Null until you have a username and XP this week."
+          },
+          "all_time_rank": {
+            "type": "integer",
+            "nullable": true,
+            "minimum": 1,
+            "description": "Rank on the all-time leaderboard. Null until you have a username and some XP."
+          }
+        }
+      },
+      "Activity": {
+        "type": "object",
+        "required": [
+          "timezone",
+          "from",
+          "to",
+          "days",
+          "range",
+          "lifetime"
+        ],
+        "properties": {
+          "timezone": {
+            "$ref": "#/components/schemas/Timezone"
+          },
+          "from": {
+            "type": "string",
+            "format": "date",
+            "description": "First day returned."
+          },
+          "to": {
+            "type": "string",
+            "format": "date",
+            "description": "Last day returned. Never after the account's today."
+          },
+          "days": {
+            "type": "array",
+            "description": "Every day from `from` to `to`, oldest first.",
+            "maxItems": 366,
+            "items": {
+              "$ref": "#/components/schemas/ActivityDay"
+            }
+          },
+          "range": {
+            "type": "object",
+            "description": "Totals for the days returned.",
+            "required": [
+              "days_active",
+              "xp_earned"
+            ],
+            "properties": {
+              "days_active": {
+                "type": "integer",
+                "minimum": 0,
+                "description": "Days in the range with status `active`."
+              },
+              "xp_earned": {
+                "type": "integer",
+                "minimum": 0,
+                "description": "XP earned in the range."
+              }
+            }
+          },
+          "lifetime": {
+            "type": "object",
+            "description": "Totals across the whole account, whatever the range.",
+            "required": [
+              "days_active",
+              "first_active_date",
+              "last_active_date"
+            ],
+            "properties": {
+              "days_active": {
+                "type": "integer",
+                "minimum": 0,
+                "description": "All days with activity. Freeze days don't count."
+              },
+              "first_active_date": {
+                "type": "string",
+                "format": "date",
+                "nullable": true
+              },
+              "last_active_date": {
+                "type": "string",
+                "format": "date",
+                "nullable": true
+              }
+            }
+          }
+        }
+      },
+      "ActivityDay": {
+        "type": "object",
+        "required": [
+          "date",
+          "status",
+          "xp_earned"
+        ],
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date"
+          },
+          "status": {
+            "$ref": "#/components/schemas/DayStatusValue"
+          },
+          "xp_earned": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "XP earned on this local day. Weekly totals in `/v1/me/xp` split weeks at Monday UTC, so near midnight a day's XP can land in a different week there.\n"
+          }
+        }
+      },
+      "AsOf": {
+        "type": "string",
+        "format": "date-time",
+        "description": "When the response was computed.",
+        "example": "2026-10-30T19:05:12Z"
+      },
+      "Timezone": {
+        "type": "string",
+        "description": "IANA timezone the account's days are counted in. It follows the device the app last ran on.",
+        "example": "Europe/Paris"
+      },
+      "Error": {
+        "type": "object",
+        "required": [
+          "error"
+        ],
+        "properties": {
+          "error": {
+            "type": "object",
+            "required": [
+              "code",
+              "message"
+            ],
+            "properties": {
+              "code": {
+                "type": "string",
+                "enum": [
+                  "invalid_request",
+                  "invalid_token",
+                  "rate_limited",
+                  "not_found",
+                  "internal_error"
+                ],
+                "description": "Stable, machine-readable. New codes may be added; handle unknown codes by HTTP status."
+              },
+              "message": {
+                "type": "string",
+                "description": "Human-readable; may change."
+              }
+            }
+          }
+        }
+      },
+      "Discovery": {
+        "type": "object",
+        "description": "Public product capabilities and official integration entry points.",
+        "required": [
+          "name",
+          "description",
+          "api_base_url",
+          "documentation_url",
+          "openapi_url",
+          "github_url",
+          "authentication",
+          "use_cases",
+          "limitations"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "api_base_url": {
+            "type": "string",
+            "format": "uri"
+          },
+          "documentation_url": {
+            "type": "string",
+            "format": "uri"
+          },
+          "openapi_url": {
+            "type": "string",
+            "format": "uri"
+          },
+          "github_url": {
+            "type": "string",
+            "format": "uri"
+          },
+          "authentication": {
+            "type": "string"
+          },
+          "use_cases": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "limitations": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+}
