@@ -6,9 +6,36 @@ import { Footer } from "@/components/footer"
 import { Clock, Gamepad2, BookOpen, Smartphone, Trophy, Zap, Target, ChevronDown } from "lucide-react"
 import { StoreBadges, APP_STORE_URL, GOOGLE_PLAY_URL } from "@/components/store-badges"
 
+const softwareApplication = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "@id": "https://algopattern.app/#software-application",
+  name: "AlgoPattern",
+  description:
+    "AlgoPattern is a mobile app for coding interview prep. Practice algorithm patterns in bite-sized sessions and build intuition for LeetCode problems.",
+  url: "https://algopattern.app/",
+  applicationCategory: "EducationalApplication",
+  operatingSystem: "iOS, Android",
+  image: "https://algopattern.app/images/og.png",
+  sameAs: [APP_STORE_URL, GOOGLE_PLAY_URL],
+  offers: {
+    "@type": "Offer",
+    price: "0",
+    priceCurrency: "USD",
+    description: "Free download",
+    url: "https://algopattern.app/#faq",
+  },
+}
+
 export default function HomePage() {
   return (
     <div className="min-h-screen bg-background">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(softwareApplication).replace(/</g, "\\u003c"),
+        }}
+      />
       {/* Header */}
       <header className="bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
