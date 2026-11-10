@@ -6,8 +6,24 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
+  async headers() {
+    return [
+      {
+        source: "/",
+        headers: [{ key: "Vary", value: "Accept" }],
+      },
+    ]
+  },
   async rewrites() {
     return {
+      // Negotiate the homepage before the existing HTML page is matched.
+      beforeFiles: [
+        {
+          source: "/",
+          has: [{ type: "header", key: "accept", value: ".*text/markdown.*" }],
+          destination: "/markdown-home",
+        },
+      ],
       afterFiles: [
         {
           source: "/ingest/static/:path*",
