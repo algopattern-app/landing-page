@@ -9,21 +9,21 @@ import { StoreBadges, APP_STORE_URL, GOOGLE_PLAY_URL } from "@/components/store-
 const softwareApplication = {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
-  "@id": "https://algopattern.dev/#software-application",
+  "@id": "https://algopattern.app/#software-application",
   name: "AlgoPattern",
   description:
     "AlgoPattern is a mobile app for coding interview prep. Practice algorithm patterns in bite-sized sessions and build intuition for LeetCode problems.",
-  url: "https://algopattern.dev/",
+  url: "https://algopattern.app/",
   applicationCategory: "EducationalApplication",
   operatingSystem: "iOS, Android",
-  image: "https://algopattern.dev/images/og.png",
+  image: "https://algopattern.app/images/og.png",
   sameAs: [APP_STORE_URL, GOOGLE_PLAY_URL],
   offers: {
     "@type": "Offer",
     price: "0",
     priceCurrency: "USD",
     description: "Free download",
-    url: "https://algopattern.dev/#faq",
+    url: "https://algopattern.app/#faq",
   },
 }
 
