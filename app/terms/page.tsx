@@ -3,7 +3,7 @@ import { Footer } from "@/components/footer"
 export default function TermsPage() {
   return (
     <div className="min-h-screen bg-background">
-      <header className="border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <header className="border-b border-border/40 bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex h-16 items-center justify-between">
             <a href="/" className="flex items-center space-x-2">
@@ -149,8 +149,7 @@ export default function TermsPage() {
             </ul>
             <p className="text-muted-foreground leading-relaxed">
               Integrations built on the public API are allowed; third-party clients are not. The public API is the
-              only supported way to access AlgoPattern programmatically, and it does not change the ban on reverse
-              engineering below. We may revoke tokens or limit access if they are misused.
+              only supported way to access AlgoPattern programmatically. We may revoke tokens or limit access if they are misused.
             </p>
           </section>
 
