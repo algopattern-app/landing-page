@@ -3,7 +3,7 @@ import { Footer } from "@/components/footer"
 export default function TermsPage() {
   return (
     <div className="min-h-screen bg-background">
-      <header className="border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <header className="border-b border-border/40 bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex h-16 items-center justify-between">
             <a href="/" className="flex items-center space-x-2">
@@ -20,7 +20,7 @@ export default function TermsPage() {
 
       <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 max-w-3xl">
         <h1 className="text-4xl font-bold text-foreground mb-2">Terms and Conditions</h1>
-        <p className="text-muted-foreground mb-12">Last updated: August 16, 2026</p>
+        <p className="text-muted-foreground mb-12">Last updated: November 16, 2026</p>
 
         <div className="space-y-10 text-foreground">
 
@@ -122,6 +122,34 @@ export default function TermsPage() {
               and branding — is the property of AlgoPattern and is protected by applicable intellectual property laws.
               You may not reproduce, distribute, or create derivative works from our content without our prior written
               permission. Personal, non-commercial use for interview preparation is permitted.
+            </p>
+          </section>
+
+          <section>
+            <h2 className="text-xl font-semibold mb-3">Developer Access</h2>
+            <p className="text-muted-foreground leading-relaxed mb-4">
+              We offer a read-only public API at{" "}
+              <a href="https://api.algopattern.app" className="text-primary hover:underline">
+                api.algopattern.app
+              </a>{" "}
+              so you can use your own progress (such as your streak, XP, and activity) in your own tools, for example
+              a home automation setup, a dashboard, or a script. You access it with a personal access token that you
+              create in the app and can revoke there at any time. The API is in beta and may change, as described in
+              its documentation.
+            </p>
+            <p className="text-muted-foreground leading-relaxed mb-3">When you use the API, you agree:</p>
+            <ul className="list-disc list-inside text-muted-foreground space-y-1 ml-2 mb-4">
+              <li>To use it only to read your own data, for personal, non-commercial purposes</li>
+              <li>To keep your tokens secret, and to give a token only to an app or service you trust</li>
+              <li>To stay within the published rate limits</li>
+              <li>
+                Not to use it, or anything else, to build an alternative client for AlgoPattern, or to access
+                questions, answers, explanations, or other users' data
+              </li>
+            </ul>
+            <p className="text-muted-foreground leading-relaxed">
+              Integrations built on the public API are allowed; third-party clients are not. The public API is the
+              only supported way to access AlgoPattern programmatically. We may revoke tokens or limit access if they are misused.
             </p>
           </section>
 

@@ -20,7 +20,7 @@ export default function PrivacyPage() {
 
       <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 max-w-3xl">
         <h1 className="text-4xl font-bold text-foreground mb-2">Privacy Policy</h1>
-        <p className="text-muted-foreground mb-12">Last updated: August 16, 2026</p>
+        <p className="text-muted-foreground mb-12">Last updated: November 16, 2026</p>
 
         <div className="space-y-10 text-foreground">
 
@@ -272,6 +272,15 @@ export default function PrivacyPage() {
                 <p className="leading-relaxed">
                   When you sign in with Apple, Apple authenticates you and shares your name and email (or a private
                   relay address) with us. See Apple's privacy policy for how Apple handles this authentication flow.
+                </p>
+              </div>
+              <div>
+                <p className="font-medium text-foreground mb-1">Apps you connect with an API token</p>
+                <p className="leading-relaxed">
+                  If you create a personal access token in the app and give it to another app or service, that app
+                  can read your AlgoPattern stats (such as your streak, XP, and activity) through our public API. It
+                  then handles that data under its own privacy policy, not ours. You can revoke a token in the app at
+                  any time.
                 </p>
               </div>
               <div>
