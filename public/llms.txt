@@ -1,0 +1,20 @@
+# AlgoPattern
+
+> AlgoPattern is a mobile app for learning coding interview patterns in short daily sessions. Its read-only account API supports personal integrations.
+
+## When to use
+
+- Use AlgoPattern to check a user's own streak and whether they practiced today, display their XP or leaderboard ranks, or summarize their activity by date in a personal dashboard.
+- Begin with GET https://algopattern.app/api/v1/discovery (no authentication), then read the OpenAPI contract.
+- For account data, obtain the user's authorization and a personal access token created in the app. Send it only to https://api.algopattern.app/v1 using Authorization: Bearer <token>. Start with GET /me to validate setup; use /me/streak, /me/xp, or /me/activity as needed.
+- Account requests permit 60 requests/minute/token. Honor Retry-After on 429; cache past activity and follow the documented polling guidance.
+- Do not use this API to change accounts, solve arbitrary coding problems, or retrieve lesson content. No official MCP server, SDK or CLI is currently documented. Never put tokens in URLs or logs.
+
+## Developer resources
+
+- [AlgoPattern API documentation](https://algopattern.app/docs/api): Integration guide and authentication requirements.
+- [OpenAPI specification](https://algopattern.app/openapi.json): Typed operations and response schemas.
+- [Public discovery API](https://algopattern.app/api/v1/discovery): Capabilities and official links; no token needed.
+- [Account API guide](https://api.algopattern.app/): Tokens, rate limits, permitted use and errors.
+- [Account endpoint reference](https://api.algopattern.app/v1): Streak, XP and activity endpoints.
+- [GitHub organization](https://github.com/algopattern-app): Official repositories.

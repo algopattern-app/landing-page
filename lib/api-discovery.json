@@ -1,0 +1,18 @@
+{
+  "name": "AlgoPattern",
+  "description": "Mobile coding interview pattern practice with personal streak, XP and activity integrations.",
+  "api_base_url": "https://api.algopattern.app/v1",
+  "documentation_url": "https://algopattern.app/docs/api",
+  "openapi_url": "https://algopattern.app/openapi.json",
+  "github_url": "https://github.com/algopattern-app",
+  "authentication": "Account endpoints require a personal access token created in the app and sent as Authorization: Bearer <token>.",
+  "use_cases": [
+    "Check your own coding practice streak and daily progress",
+    "Display your XP and leaderboard ranks in a personal dashboard",
+    "Summarize your own practice activity by date"
+  ],
+  "limitations": [
+    "Account access requires user authorization and a personal access token",
+    "No public lesson content, account writes, MCP server, SDK or CLI is provided by this discovery endpoint"
+  ]
+}

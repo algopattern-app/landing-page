@@ -43,6 +43,10 @@ Download it for free on the [App Store](https://apps.apple.com/us/app/algopatter
 ## Links
 
 - [Homepage](https://algopattern.app/)
+- [API documentation](https://algopattern.app/docs/api)
+- [OpenAPI](https://algopattern.app/openapi.json)
+- [Agent instructions](https://algopattern.app/llms.txt)
+- [GitHub](https://github.com/algopattern-app)
 - [Contact](https://algopattern.app/contact)
 - [Privacy Policy](https://algopattern.app/privacy)
 - [Terms](https://algopattern.app/terms)

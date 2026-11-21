@@ -15,9 +15,10 @@ export function Footer() {
                         <a href="/privacy" className="text-muted-foreground hover:text-foreground transition-colors">
                             Privacy Policy
                         </a>
-                        <a href="https://api.algopattern.app/" className="text-muted-foreground hover:text-foreground transition-colors">
+                        <a href="/docs/api" className="text-muted-foreground hover:text-foreground transition-colors">
                             API Docs
                         </a>
+                        <a href="https://github.com/algopattern-app" className="text-muted-foreground hover:text-foreground transition-colors">GitHub</a>
                         <a href="/contact" className="text-muted-foreground hover:text-foreground transition-colors">
                             Contact
                         </a>
